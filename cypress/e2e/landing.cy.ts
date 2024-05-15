@@ -1,35 +1,58 @@
+let storageCache;
+
 describe('Landing Page', () => {
-  beforeEach(() => {
-    cy.visit('http://localhost:3000');
-  });
+  // before(() => {
+  //   cy.authenticate().then((_) => {
+  //     storageCache = { ...localStorage };
+  //   });
+  // });
+  // beforeEach(() => {
+  //   cy.visit('/', {
+  //     onBeforeLoad(win) {
+  //       Object.entries(storageCache).forEach(([k, v]) => {
+  //         win.localStorage.setItem(k, '' + v);
+  //       });
+  //     },
+  //   });
+  // });
 
-  context('Default Page', () => {
-    context.only('Hero Section', () => {
-      it('Hero contains correct information', () => {
-        cy.get('h1').contains('Welcome to GradeMaster!');
-      });
+  context('Hero Section', () => {
+    it('Hero contains correct information', () => {
+      cy.visit('/');
+      cy.get('h1').contains('Welcome to GradeMaster!');
     });
   });
 
-  context('Navbar', () => {
-    it('Navbar includes theme toggle', () => {
-      cy.get('#theme-toggle').should('exist');
-      cy.get('.theme-controller').should('have.value', 'light');
-    });
-  });
+  // context('Navbar', () => {
+  //   it('Includes theme toggle', () => {
+  //     cy.get('#theme-toggle').should('exist');
+  //     cy.get('.theme-controller').should('have.value', 'light');
+  //   });
 
-  context('Side Menu', () => {
-    it('Contains brand link', () => {
-      cy.get('#brand').should('exist');
-      cy.get('#brand').get('div').contains('GradeMaster');
-    });
+  //   it('Includes account button', () => {
+  //     cy.get('#account-button').should('exist');
+  //     cy.get('#account-button').contains(Cypress.env('cognito_username'));
+  //   });
+  // });
 
-    it('New semester button works', () => {});
-    context('Semester List', () => {
-      it('Semesters are listed', () => {});
-      it('Each semeter contains semester detail link and add class button', () => {});
-      it('Semester classes are listed', () => {});
-      it('New class button works', () => {});
-    });
-  });
+  // context('Side Menu', () => {
+  //   it('Contains brand link', () => {
+  //     cy.get('#brand').should('exist');
+  //     cy.get('#brand').get('div').contains('GradeMaster');
+  //   });
+
+  //   it.only('Contains all correct information', () => {
+  //     cy.get('.menu-title').contains('Semesters');
+  //     cy.get('.menu ul li').eq(0).should('exist');
+  //     cy.get('.menu ul li').eq(0).contains('New Semester');
+  //   });
+
+  //   it('New semester button works', () => {});
+  //   context('Semester List', () => {
+  //     it('Semesters are listed', () => {});
+  //     it('Each semeter contains semester detail link and add class button', () => {});
+  //     it('Semester classes are listed', () => {});
+  //     it('New class button works', () => {});
+  //   });
+  // });
 });

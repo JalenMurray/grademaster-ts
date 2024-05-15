@@ -36,35 +36,23 @@
 //   }
 // }
 
-declare namespace Cypress {
-  interface Chainable<Subject = any> {
-    login(username: string, password: string): Chainable<void>;
+import { Amplify } from 'aws-amplify';
+import { SignInOutput, signIn } from 'aws-amplify/auth';
+import outputs from '../../amplify_outputs.json';
+Amplify.configure(outputs);
+
+declare global {
+  namespace Cypress {
+    interface Chainable {
+      authenticate(): Promise<boolean>;
+    }
   }
 }
 
-const login = (username: string, password: string) => {
-  Cypress.log({
-    displayName: 'COGNITO LOGIN',
-    message: [`Authenticating | ${username}`],
-    autoEnd: false,
+Cypress.Commands.add('authenticate', async () => {
+  const output = await signIn({
+    username: Cypress.env('cognito_username'),
+    password: Cypress.env('cognito_password'),
   });
-  cy.origin(
-    Cypress.env('cognito_domain'),
-    { args: { username, password } },
-    ({ username, password }) => {
-      cy.contains('Sign in with your email and password');
-      cy.get('input[name="username"]:visible').type(username);
-      cy.get('input[name="password"]:visible').type(password, {
-        // use log: false to prevent your password from showing in the Command Log
-        log: false,
-      });
-      cy.get('input[name="signInSubmitButton"]:visible').click();
-    }
-  );
-  cy.wait(2000);
-  cy.contains('Welcome to GradeMaster!').should('be.visible');
-};
-
-Cypress.Commands.add('login', (username: string, password: string) => {
-  return login(username, password);
+  return output.isSignedIn;
 });
