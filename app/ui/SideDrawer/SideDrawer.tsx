@@ -3,6 +3,7 @@ import Image from 'next/image';
 import SemesterDropdown from './SemesterDropdown';
 import { cookiesClient } from '@/app/utils/amplify-utils';
 import { Semester } from '@/app/lib/definitions';
+import OpenModalButton from '../OpenModalButton';
 
 async function getData() {
   const semesters = await cookiesClient.models.Semester.list();
@@ -42,7 +43,7 @@ export default async function SideDrawer() {
             <h2 className="menu-title">Semesters</h2>
             <ul>
               <li>
-                <button className="btn btn-ghost group">New Semester</button>
+                <OpenModalButton buttonText="New Semester" modalId="new_semester_modal" />
               </li>
               {semesters.sort(sortSemesters).map((semester) => (
                 <li key={semester.id}>
