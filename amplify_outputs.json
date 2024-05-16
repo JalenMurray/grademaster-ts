@@ -1,18 +1,12 @@
 {
   "auth": {
-    "user_pool_id": "us-east-1_9oG66bbzt",
+    "user_pool_id": "us-east-1_Si3nFUJ4o",
     "aws_region": "us-east-1",
-    "user_pool_client_id": "7usmomthodvdl4k8j492sahgt9",
-    "identity_pool_id": "us-east-1:fb72d3df-3dcc-41fd-98f7-848307fabd1f",
-    "standard_required_attributes": [
-      "email"
-    ],
-    "username_attributes": [
-      "email"
-    ],
-    "user_verification_types": [
-      "email"
-    ],
+    "user_pool_client_id": "2qch5o5219rhea0fmsg6j9derd",
+    "identity_pool_id": "us-east-1:b61c5826-abbd-4d15-8d03-d7a36d570675",
+    "standard_required_attributes": ["email"],
+    "username_attributes": ["email"],
+    "user_verification_types": ["email"],
     "password_policy": {
       "min_length": 8,
       "require_numbers": true,
@@ -23,14 +17,11 @@
     "unauthenticated_identities_enabled": true
   },
   "data": {
-    "url": "https://65xysuoj45fmjb3g7eubznk3qm.appsync-api.us-east-1.amazonaws.com/graphql",
+    "url": "https://skaongr7xvfz3nmgqhsodjavj4.appsync-api.us-east-1.amazonaws.com/graphql",
     "aws_region": "us-east-1",
-    "api_key": "da2-e2jonr5n7vcrdlp6hpz3p5xvsa",
+    "api_key": "da2-exxld2hc45eitmepewhcjnatti",
     "default_authorization_type": "AMAZON_COGNITO_USER_POOLS",
-    "authorization_types": [
-      "API_KEY",
-      "AWS_IAM"
-    ],
+    "authorization_types": ["API_KEY", "AWS_IAM"],
     "model_introspection": {
       "version": 1,
       "models": {
@@ -96,9 +87,7 @@
               "attributes": [],
               "association": {
                 "connectionType": "BELONGS_TO",
-                "targetNames": [
-                  "assignmentTypeId"
-                ]
+                "targetNames": ["assignmentTypeId"]
               }
             },
             "createdAt": {
@@ -134,12 +123,7 @@
                     "ownerField": "owner",
                     "allow": "owner",
                     "identityClaim": "cognito:username",
-                    "operations": [
-                      "create",
-                      "update",
-                      "delete",
-                      "read"
-                    ]
+                    "operations": ["create", "update", "delete", "read"]
                   }
                 ]
               }
@@ -172,9 +156,7 @@
               "isArrayNullable": true,
               "association": {
                 "connectionType": "HAS_MANY",
-                "associatedWith": [
-                  "assignmentTypeId"
-                ]
+                "associatedWith": ["assignmentTypeId"]
               }
             },
             "name": {
@@ -243,9 +225,7 @@
               "attributes": [],
               "association": {
                 "connectionType": "BELONGS_TO",
-                "targetNames": [
-                  "classId"
-                ]
+                "targetNames": ["classId"]
               }
             },
             "createdAt": {
@@ -281,12 +261,7 @@
                     "ownerField": "owner",
                     "allow": "owner",
                     "identityClaim": "cognito:username",
-                    "operations": [
-                      "create",
-                      "update",
-                      "delete",
-                      "read"
-                    ]
+                    "operations": ["create", "update", "delete", "read"]
                   }
                 ]
               }
@@ -319,9 +294,7 @@
               "isArrayNullable": true,
               "association": {
                 "connectionType": "HAS_MANY",
-                "associatedWith": [
-                  "classId"
-                ]
+                "associatedWith": ["classId"]
               }
             },
             "code": {
@@ -383,9 +356,7 @@
               "attributes": [],
               "association": {
                 "connectionType": "BELONGS_TO",
-                "targetNames": [
-                  "semesterId"
-                ]
+                "targetNames": ["semesterId"]
               }
             },
             "createdAt": {
@@ -421,12 +392,7 @@
                     "ownerField": "owner",
                     "allow": "owner",
                     "identityClaim": "cognito:username",
-                    "operations": [
-                      "create",
-                      "update",
-                      "delete",
-                      "read"
-                    ]
+                    "operations": ["create", "update", "delete", "read"]
                   }
                 ]
               }
@@ -459,9 +425,7 @@
               "isArrayNullable": true,
               "association": {
                 "connectionType": "HAS_MANY",
-                "associatedWith": [
-                  "semesterId"
-                ]
+                "associatedWith": ["semesterId"]
               }
             },
             "season": {
@@ -520,12 +484,7 @@
                     "ownerField": "owner",
                     "allow": "owner",
                     "identityClaim": "cognito:username",
-                    "operations": [
-                      "create",
-                      "update",
-                      "delete",
-                      "read"
-                    ]
+                    "operations": ["create", "update", "delete", "read"]
                   }
                 ]
               }
@@ -541,12 +500,7 @@
       "enums": {
         "SemesterSeason": {
           "name": "SemesterSeason",
-          "values": [
-            "Spring",
-            "Summer",
-            "Fall",
-            "Winter"
-          ]
+          "values": ["Spring", "Summer", "Fall", "Winter"]
         }
       },
       "nonModels": {}
