@@ -21,6 +21,7 @@ describe('Landing Page', () => {
     it('Hero contains correct information', () => {
       cy.get('h1').contains('Welcome to GradeMaster!');
       cy.get('button').eq(0).contains('Login');
+      cy.log('Hello');
     });
   });
 
