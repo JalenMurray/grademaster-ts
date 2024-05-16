@@ -52,8 +52,8 @@ declare global {
 
 Cypress.Commands.add('authenticate', async () => {
   const output = await signIn({
-    username: Cypress.env('cognito_username'),
-    password: Cypress.env('cognito_password'),
+    username: Cypress.env('USERNAME'),
+    password: Cypress.env('PASSWORD'),
   });
   return output;
 });
