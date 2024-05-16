@@ -17,7 +17,7 @@ jobs:
         with:
           build: npm run build
           # record: true
-          group: 'UI-Chrome'
+          # group: 'UI-Chrome'
           start: npm start
           wait-on: 'http://localhost:3000'
           wait-on-timeout: 120
