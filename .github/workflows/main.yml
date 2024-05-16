@@ -6,54 +6,19 @@ on:
       - main
 
 jobs:
-  install:
-    runs-on: ubuntu-22.04
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Cypress install
-        uses: cypress-io/github-action@v6
-        with:
-          # Disable running of tests within install job
-          runTests: false
-          build: npm run build
-
-      - name: Save build folder
-        uses: actions/upload-artifact@v4
-        with:
-          name: build
-          if-no-files-found: error
-          path: .next
-
   cypress-run:
     runs-on: ubuntu-22.04
-    needs: install
-    strategy:
-      # don't fail the entire matrix on failure
-      fail-fast: false
-      matrix:
-        # run copies of the current job in parallel
-        containers: [1, 2, 3, 4, 5]
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
-      - name: Download the build folder
-        uses: actions/download-artifact@v4
-        with:
-          name: build
-
-      - name: Install Dependencies
-        run: npm ci
 
       - name: Cypress run
         uses: cypress-io/github-action@v6
         with:
+          build: npm run build
           record: true
-          parallel: true
           group: 'UI-Chrome'
-          start: npx next start
+          start: npm start
           wait-on: 'http://localhost:3000'
           wait-on-timeout: 120
         env:
@@ -62,3 +27,22 @@ jobs:
           # Recommended: pass the GitHub token lets this action correctly
           # determine the unique run id necessary to re-run the checks
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  # install:
+  #   runs-on: ubuntu-22.04
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v4
+
+  #     - name: Cypress install
+  #       uses: cypress-io/github-action@v6
+  #       with:
+  #         # Disable running of tests within install job
+  #         runTests: false
+  #         build: npm run build
+
+  #     - name: Save build folder
+  #       uses: actions/upload-artifact@v4
+  #       with:
+  #         name: build
+  #         if-no-files-found: error
+  #         path: .next
