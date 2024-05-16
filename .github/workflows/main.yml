@@ -50,7 +50,7 @@ jobs:
           record: true
           parallel: true
           group: 'UI-Chrome'
-          start: npm start
+          start: npm run start
           wait-on: 'http://localhost:3000'
           wait-on-timeout: 120
         env:
