@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
+import Logout from './ui/Logout';
 
 export default function App() {
   return (
@@ -22,6 +23,7 @@ export default function App() {
           <Link href="/login">
             <button className="btn btn-primary text-lg">Login</button>
           </Link>
+          <Logout />
         </div>
       </div>
     </div>

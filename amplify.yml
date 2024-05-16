@@ -1,6 +1,10 @@
 version: 1
 backend:
   phases:
+    preTest:
+      commands:
+        - npm ci
+        - npm install -g pm2
     build:
       commands:
         - npm ci --cache .npm --prefer-offline

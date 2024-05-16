@@ -1,0 +1,623 @@
+{
+  "stats": {
+    "suites": 2,
+    "tests": 16,
+    "passes": 0,
+    "pending": 0,
+    "failures": 3,
+    "testsRegistered": 16,
+    "passPercent": 0,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 13,
+    "hasSkipped": true,
+    "start": "2024-05-16T03:28:49.387Z",
+    "end": "2024-05-16T03:28:56.249Z",
+    "duration": 6862
+  },
+  "results": [
+    {
+      "uuid": "28fe1213-04a1-479a-bf74-6cd13ed4e44b",
+      "title": "",
+      "fullFile": "cypress\\e2e\\calculator.cy.ts",
+      "file": "cypress\\e2e\\calculator.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "e5ae59ed-9b91-4cbb-932c-951f2412fddc",
+          "title": "Calculator",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [],
+          "suites": [
+            {
+              "uuid": "6cfcff76-9d37-4277-b8fe-829a0b054090",
+              "title": "Side Menu",
+              "fullFile": "",
+              "file": "",
+              "beforeHooks": [],
+              "afterHooks": [],
+              "tests": [
+                {
+                  "title": "Contains brand link",
+                  "fullTitle": "Calculator Side Menu Contains brand link",
+                  "timedOut": null,
+                  "duration": 1178,
+                  "state": "failed",
+                  "speed": null,
+                  "pass": false,
+                  "fail": true,
+                  "pending": false,
+                  "context": null,
+                  "code": "cy.get('#brand').should('exist');\ncy.get('#brand').get('div').contains('GradeMaster');",
+                  "err": {
+                    "message": "CypressError: `cy.visit()` failed trying to load:\n\nhttp://localhost:3000/calculator\n\nThe response we received from your web server was:\n\n  > 500: Internal Server Error\n\nThis was considered a failure because the status code was not `2xx`.\n\nIf you do not want status codes to cause failures pass the option: `failOnStatusCode: false`\n\nBecause this error occurred during a `before each` hook we are skipping the remaining tests in the current suite: `Side Menu`",
+                    "estack": "CypressError: `cy.visit()` failed trying to load:\n\nhttp://localhost:3000/calculator\n\nThe response we received from your web server was:\n\n  > 500: Internal Server Error\n\nThis was considered a failure because the status code was not `2xx`.\n\nIf you do not want status codes to cause failures pass the option: `failOnStatusCode: false`\n\nBecause this error occurred during a `before each` hook we are skipping the remaining tests in the current suite: `Side Menu`\n    at <unknown> (http://localhost:3000/__cypress/runner/cypress_runner.js:131464:76)\n    at visitFailedByErr (http://localhost:3000/__cypress/runner/cypress_runner.js:130878:12)\n    at <unknown> (http://localhost:3000/__cypress/runner/cypress_runner.js:131447:13)\n    at tryCatcher (http://localhost:3000/__cypress/runner/cypress_runner.js:1807:23)\n    at Promise._settlePromiseFromHandler (http://localhost:3000/__cypress/runner/cypress_runner.js:1519:31)\n    at Promise._settlePromise (http://localhost:3000/__cypress/runner/cypress_runner.js:1576:18)\n    at Promise._settlePromise0 (http://localhost:3000/__cypress/runner/cypress_runner.js:1621:10)\n    at Promise._settlePromises (http://localhost:3000/__cypress/runner/cypress_runner.js:1697:18)\n    at _drainQueueStep (http://localhost:3000/__cypress/runner/cypress_runner.js:2407:12)\n    at _drainQueue (http://localhost:3000/__cypress/runner/cypress_runner.js:2400:9)\n    at Async._drainQueues (http://localhost:3000/__cypress/runner/cypress_runner.js:2416:5)\n    at Async.drainQueues (http://localhost:3000/__cypress/runner/cypress_runner.js:2286:14)\nFrom Your Spec Code:\n    at Context.eval (webpack://grademaster/./cypress/e2e/calculator.cy.ts:25:0)",
+                    "diff": null
+                  },
+                  "uuid": "a8e92a00-9c53-4a87-ae25-4e895d7f50d5",
+                  "parentUUID": "6cfcff76-9d37-4277-b8fe-829a0b054090",
+                  "isHook": false,
+                  "skipped": false
+                },
+                {
+                  "title": "Contains all correct information",
+                  "fullTitle": "Calculator Side Menu Contains all correct information",
+                  "timedOut": null,
+                  "duration": 0,
+                  "state": "skipped",
+                  "speed": null,
+                  "pass": false,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "cy.get('.menu-title').contains('Semesters');\ncy.get('.menu ul li').eq(0).should('exist');\ncy.get('.menu ul li').eq(0).contains('New Semester');",
+                  "err": {},
+                  "uuid": "6c22bc63-0760-40b9-bd06-7a850204ffb7",
+                  "parentUUID": "6cfcff76-9d37-4277-b8fe-829a0b054090",
+                  "isHook": false,
+                  "skipped": true
+                }
+              ],
+              "suites": [
+                {
+                  "uuid": "daa9acb0-3b89-4984-bcbb-a129f600aa82",
+                  "title": "Semester List",
+                  "fullFile": "",
+                  "file": "",
+                  "beforeHooks": [],
+                  "afterHooks": [],
+                  "tests": [
+                    {
+                      "title": "Semesters are listed",
+                      "fullTitle": "Calculator Side Menu Semester List Semesters are listed",
+                      "timedOut": null,
+                      "duration": 0,
+                      "state": "skipped",
+                      "speed": null,
+                      "pass": false,
+                      "fail": false,
+                      "pending": false,
+                      "context": null,
+                      "code": "// Test data has 4 Semesters\ncy.getByData('semesterDropdown')\n    .should('have.length', 4)\n    .each(function (semester, i) {\n    var SEMESTER_ORDER = ['Spring 2024', 'Summer 2022', 'Winter 2021', 'Fall 2020'];\n    var CLASS_ORDER = [\n        ['CMSC421', 'SOCY410'],\n        ['CMSC351', 'ENGL393', 'SOCY342'],\n        ['AASP200', 'AOSC200', 'AOSC201', 'CMSC216'],\n        ['CMSC131', 'COMM107', 'CPET101', 'MATH140'],\n    ];\n    var semesterId = semester[0].id;\n    // Ensure in correct semester\n    cy.wrap(semester).contains(SEMESTER_ORDER[i]);\n    /*\n      Get the list items in the semester dropdown and ensure that the first two\n      are 'Semester Details' and New Class Button respectively and that the remaining\n      list items correspond to the classes and contain the relevant links for the classes.\n    */\n    cy.wrap(semester)\n        .children('ul')\n        .children('li')\n        .each(function (elem, j) {\n        if (j > 1) {\n            var cls = CLASS_ORDER[i][j - 2];\n            cy.wrap(elem).contains(cls);\n        }\n        else if (j === 0) {\n            cy.wrap(elem)\n                .contains('Semester Details')\n                .should('have.attr', 'href')\n                .and('equal', \"/calculator/semester/\".concat(semesterId));\n        }\n        else {\n            cy.wrap(elem)\n                .contains('New Class')\n                .should('have.attr', 'data-test')\n                .and('equal', 'openModalButton');\n        }\n    });\n});",
+                      "err": {},
+                      "uuid": "e5ecb8df-502f-44c1-bf00-274c17d9c5ba",
+                      "parentUUID": null,
+                      "isHook": false,
+                      "skipped": true
+                    },
+                    {
+                      "title": "New class button works",
+                      "fullTitle": "Calculator Side Menu Semester List New class button works",
+                      "timedOut": null,
+                      "duration": 0,
+                      "state": "skipped",
+                      "speed": null,
+                      "pass": false,
+                      "fail": false,
+                      "pending": false,
+                      "context": null,
+                      "code": "cy.get('#new_class_modal').should('not.be.visible');\ncy.getByData('semesterDropdown')\n    .eq(0)\n    .then(function (dropdown) {\n    // Open Dropdown so button is visible\n    cy.wrap(dropdown).click();\n    // Click New Class button\n    cy.wrap(dropdown)\n        .children('ul')\n        .children('li')\n        .eq(1)\n        .children()\n        .should('exist')\n        .contains('New Class')\n        .click();\n    cy.get('#new_class_modal').should('be.visible');\n});",
+                      "err": {},
+                      "uuid": "2b4ee64c-4f78-469b-99f0-67661497b321",
+                      "parentUUID": null,
+                      "isHook": false,
+                      "skipped": true
+                    },
+                    {
+                      "title": "New class modal contains correct fields",
+                      "fullTitle": "Calculator Side Menu Semester List New class modal contains correct fields",
+                      "timedOut": null,
+                      "duration": 0,
+                      "state": "skipped",
+                      "speed": null,
+                      "pass": false,
+                      "fail": false,
+                      "pending": false,
+                      "context": null,
+                      "code": "cy.get('#new_class_modal').should('not.be.visible');\nvar semesterId;\ncy.getByData('semesterDropdown')\n    .eq(0)\n    .then(function (dropdown) {\n    semesterId = dropdown[0].id;\n    // Open Dropdown so button is visible\n    cy.wrap(dropdown).click();\n    // Click New Class button\n    cy.wrap(dropdown)\n        .children('ul')\n        .children('li')\n        .eq(1)\n        .children()\n        .should('exist')\n        .contains('New Class')\n        .click();\n    cy.get('#new_class_modal').should('be.visible');\n});\ncy.getByData('newClassForm').should('be.visible');\ncy.getByData('newClassForm', 'h3').contains('New Class');\n// Semester Id (Hidden)\n/*\n  This is set in the onClick for OpenModal and I'm not seeing it reflected in the DOM\n  But the functionality is working, so I'll just check that it exists for now\n*/\ncy.getByData('newClassForm', 'input')\n    .eq(1)\n    .should('have.attr', 'name')\n    .and('equal', 'semesterId');\n// Code\ncy.getByData('newClassForm', 'label').eq(0).contains('Code');\ncy.getByData('newClassForm', 'input').eq(2).should('have.value', '');\n// Class Name\ncy.getByData('newClassForm', 'label').eq(1).contains('Class Name');\ncy.getByData('newClassForm', 'input').eq(3).should('have.value', '');\n// Desired Score\ncy.getByData('newClassForm', 'label').eq(2).contains('Desired Score');\ncy.getByData('newClassForm', 'input').eq(4).should('have.value', 100);\ncy.getByData('newClassForm', 'input')\n    .eq(4)\n    .should('have.attr', 'type')\n    .and('equal', 'number');\n// Units\ncy.getByData('newClassForm', 'label').eq(3).contains('Units');\ncy.getByData('newClassForm', 'input').eq(5).should('have.value', 3);\ncy.getByData('newClassForm', 'input')\n    .eq(5)\n    .should('have.attr', 'type')\n    .and('equal', 'number');\n// Display Color\n/*\n  Similarly to SemesterId, I'm unsure how to test this besides checking that the fields exists since it\n  does not show updates in the DOM.  This is also a third party component, so I don't believe I need to\n  test it much anyways.\n*/\ncy.getByData('newClassForm', 'label').eq(4).contains('Display Color');\ncy.get('#display-color-string').should('exist');",
+                      "err": {},
+                      "uuid": "89a4dee6-14ca-48d1-9eac-2e694965e8d2",
+                      "parentUUID": null,
+                      "isHook": false,
+                      "skipped": true
+                    }
+                  ],
+                  "suites": [],
+                  "passes": [],
+                  "failures": [],
+                  "pending": [],
+                  "skipped": [
+                    "e5ecb8df-502f-44c1-bf00-274c17d9c5ba",
+                    "2b4ee64c-4f78-469b-99f0-67661497b321",
+                    "89a4dee6-14ca-48d1-9eac-2e694965e8d2"
+                  ],
+                  "duration": 0,
+                  "root": false,
+                  "rootEmpty": false,
+                  "_timeout": 2000
+                },
+                {
+                  "uuid": "120be8c0-75d0-4f57-921e-0dc03edf30f5",
+                  "title": "New Semester UI",
+                  "fullFile": "",
+                  "file": "",
+                  "beforeHooks": [],
+                  "afterHooks": [],
+                  "tests": [
+                    {
+                      "title": "New semester button works",
+                      "fullTitle": "Calculator Side Menu New Semester UI New semester button works",
+                      "timedOut": null,
+                      "duration": 0,
+                      "state": "skipped",
+                      "speed": null,
+                      "pass": false,
+                      "fail": false,
+                      "pending": false,
+                      "context": null,
+                      "code": "cy.get('#new_semester_modal').should('not.be.visible');\ncy.getByData('openModalButton').eq(0).contains('New Semester').click();\ncy.get('#new_semester_modal').should('be.visible');",
+                      "err": {},
+                      "uuid": "879dd6fd-3cdd-41a5-ac19-76f8a5291184",
+                      "parentUUID": null,
+                      "isHook": false,
+                      "skipped": true
+                    },
+                    {
+                      "title": "New semester modal contains correct fields",
+                      "fullTitle": "Calculator Side Menu New Semester UI New semester modal contains correct fields",
+                      "timedOut": null,
+                      "duration": 0,
+                      "state": "skipped",
+                      "speed": null,
+                      "pass": false,
+                      "fail": false,
+                      "pending": false,
+                      "context": null,
+                      "code": "cy.getByData('openModalButton').eq(0).click();\ncy.getByData('newSemesterForm').should('be.visible');\ncy.getByData('newSemesterForm', 'h3').contains('New Semester');\n// Season\ncy.getByData('newSemesterForm', 'label').eq(0).contains(\"Select the Semester's Season\");\ncy.getByData('newSemesterForm', 'option').each(function (option, i) {\n    var season = 'Winter'; // 0 Should be Winter\n    if (i === 1) {\n        season = 'Spring';\n    }\n    else if (i === 2) {\n        season = 'Summer';\n    }\n    else if (i === 3) {\n        season = 'Fall';\n    }\n    cy.wrap(option).contains(season).should('have.value', season);\n});\ncy.getByData('newSemesterForm', 'select').should('have.value', getDefaultSemester());\n// Year\ncy.getByData('newSemesterForm', 'label').eq(1).contains('Year');\ncy.getByData('newSemesterForm', 'input')\n    .eq(1)\n    .should('have.attr', 'type')\n    .and('equal', 'number');\ncy.getByData('newSemesterForm', 'input').eq(1).should('have.value', currYear);\n// Current Semester Checkbox\ncy.getByData('newSemesterForm', 'label').eq(2).contains('Current Semester');\ncy.getByData('newSemesterForm', 'input')\n    .eq(2)\n    .should('have.attr', 'type')\n    .and('equal', 'checkbox');\ncy.getByData('newSemesterForm', 'input').eq(2).should('have.attr', 'checked');",
+                      "err": {},
+                      "uuid": "c2574bf8-81af-4ccf-99e9-b3d07ecd9880",
+                      "parentUUID": null,
+                      "isHook": false,
+                      "skipped": true
+                    }
+                  ],
+                  "suites": [],
+                  "passes": [],
+                  "failures": [],
+                  "pending": [],
+                  "skipped": [
+                    "879dd6fd-3cdd-41a5-ac19-76f8a5291184",
+                    "c2574bf8-81af-4ccf-99e9-b3d07ecd9880"
+                  ],
+                  "duration": 0,
+                  "root": false,
+                  "rootEmpty": false,
+                  "_timeout": 2000
+                }
+              ],
+              "passes": [],
+              "failures": [
+                "a8e92a00-9c53-4a87-ae25-4e895d7f50d5"
+              ],
+              "pending": [],
+              "skipped": [
+                "6c22bc63-0760-40b9-bd06-7a850204ffb7"
+              ],
+              "duration": 1178,
+              "root": false,
+              "rootEmpty": false,
+              "_timeout": 2000
+            },
+            {
+              "uuid": "bd07687a-f5a5-4597-8344-8c2737e7f08c",
+              "title": "Semester Detail Page",
+              "fullFile": "",
+              "file": "",
+              "beforeHooks": [],
+              "afterHooks": [],
+              "tests": [
+                {
+                  "title": "Able to navigate to correct semester detail page using UI",
+                  "fullTitle": "Calculator Semester Detail Page Able to navigate to correct semester detail page using UI",
+                  "timedOut": null,
+                  "duration": 996,
+                  "state": "failed",
+                  "speed": null,
+                  "pass": false,
+                  "fail": true,
+                  "pending": false,
+                  "context": null,
+                  "code": "cy.visit('/calculator');\ncy.getByData('semesterDropdown')\n    .eq(0)\n    .then(function (dropdown) {\n    cy.wrap(dropdown).click();\n    cy.wrap(dropdown).children('ul').children('li').eq(0).click();\n});\ncy.get('h1').contains('Spring 2024');",
+                  "err": {
+                    "message": "CypressError: `cy.visit()` failed trying to load:\n\nhttp://localhost:3000/calculator/semester/f1eb6d17-1dbe-4e1f-bcbb-7119dc6a4269\n\nThe response we received from your web server was:\n\n  > 500: Internal Server Error\n\nThis was considered a failure because the status code was not `2xx`.\n\nIf you do not want status codes to cause failures pass the option: `failOnStatusCode: false`\n\nBecause this error occurred during a `before each` hook we are skipping the remaining tests in the current suite: `Semester Detail Page`",
+                    "estack": "CypressError: `cy.visit()` failed trying to load:\n\nhttp://localhost:3000/calculator/semester/f1eb6d17-1dbe-4e1f-bcbb-7119dc6a4269\n\nThe response we received from your web server was:\n\n  > 500: Internal Server Error\n\nThis was considered a failure because the status code was not `2xx`.\n\nIf you do not want status codes to cause failures pass the option: `failOnStatusCode: false`\n\nBecause this error occurred during a `before each` hook we are skipping the remaining tests in the current suite: `Semester Detail Page`\n    at <unknown> (http://localhost:3000/__cypress/runner/cypress_runner.js:131464:76)\n    at visitFailedByErr (http://localhost:3000/__cypress/runner/cypress_runner.js:130878:12)\n    at <unknown> (http://localhost:3000/__cypress/runner/cypress_runner.js:131447:13)\n    at tryCatcher (http://localhost:3000/__cypress/runner/cypress_runner.js:1807:23)\n    at Promise._settlePromiseFromHandler (http://localhost:3000/__cypress/runner/cypress_runner.js:1519:31)\n    at Promise._settlePromise (http://localhost:3000/__cypress/runner/cypress_runner.js:1576:18)\n    at Promise._settlePromise0 (http://localhost:3000/__cypress/runner/cypress_runner.js:1621:10)\n    at Promise._settlePromises (http://localhost:3000/__cypress/runner/cypress_runner.js:1697:18)\n    at _drainQueueStep (http://localhost:3000/__cypress/runner/cypress_runner.js:2407:12)\n    at _drainQueue (http://localhost:3000/__cypress/runner/cypress_runner.js:2400:9)\n    at Async._drainQueues (http://localhost:3000/__cypress/runner/cypress_runner.js:2416:5)\n    at Async.drainQueues (http://localhost:3000/__cypress/runner/cypress_runner.js:2286:14)\nFrom Your Spec Code:\n    at Context.eval (webpack://grademaster/./cypress/e2e/calculator.cy.ts:217:0)",
+                    "diff": null
+                  },
+                  "uuid": "3c3db687-9335-424d-9a7d-60a9843fdd99",
+                  "parentUUID": "bd07687a-f5a5-4597-8344-8c2737e7f08c",
+                  "isHook": false,
+                  "skipped": false
+                },
+                {
+                  "title": "Able to navigate to correct semester detail page using URL",
+                  "fullTitle": "Calculator Semester Detail Page Able to navigate to correct semester detail page using URL",
+                  "timedOut": null,
+                  "duration": 0,
+                  "state": "skipped",
+                  "speed": null,
+                  "pass": false,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "cy.get('h1').contains('Spring 2024');",
+                  "err": {},
+                  "uuid": "0e204aa2-502c-4f2f-a66f-05acb68a7206",
+                  "parentUUID": "bd07687a-f5a5-4597-8344-8c2737e7f08c",
+                  "isHook": false,
+                  "skipped": true
+                },
+                {
+                  "title": "Action buttons are correct",
+                  "fullTitle": "Calculator Semester Detail Page Action buttons are correct",
+                  "timedOut": null,
+                  "duration": 0,
+                  "state": "skipped",
+                  "speed": null,
+                  "pass": false,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "cy.getByData('actionButtons', 'button').eq(0).contains('Edit Semester');\ncy.getByData('actionButtons', 'button').eq(1).contains('New Class');\ncy.getByData('actionButtons', 'button').eq(2).contains('Delete Semester');",
+                  "err": {},
+                  "uuid": "7d9133fe-cdea-46cd-8b9d-5b13d99f2240",
+                  "parentUUID": "bd07687a-f5a5-4597-8344-8c2737e7f08c",
+                  "isHook": false,
+                  "skipped": true
+                },
+                {
+                  "title": "New class button works",
+                  "fullTitle": "Calculator Semester Detail Page New class button works",
+                  "timedOut": null,
+                  "duration": 0,
+                  "state": "skipped",
+                  "speed": null,
+                  "pass": false,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "cy.get('#new_class_modal').should('not.be.visible');\ncy.getByData('actionButtons', 'button').eq(1).click();\ncy.get('#new_class_modal').should('be.visible');\ncy.getByData('newClassForm').should('be.visible');",
+                  "err": {},
+                  "uuid": "98b6cf06-d0df-4c93-818d-3b99788a05a0",
+                  "parentUUID": "bd07687a-f5a5-4597-8344-8c2737e7f08c",
+                  "isHook": false,
+                  "skipped": true
+                }
+              ],
+              "suites": [],
+              "passes": [],
+              "failures": [
+                "3c3db687-9335-424d-9a7d-60a9843fdd99"
+              ],
+              "pending": [],
+              "skipped": [
+                "0e204aa2-502c-4f2f-a66f-05acb68a7206",
+                "7d9133fe-cdea-46cd-8b9d-5b13d99f2240",
+                "98b6cf06-d0df-4c93-818d-3b99788a05a0"
+              ],
+              "duration": 996,
+              "root": false,
+              "rootEmpty": false,
+              "_timeout": 2000
+            }
+          ],
+          "passes": [],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 0,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "1ac94a77-a687-45e4-948b-bc35630d1d89",
+      "title": "",
+      "fullFile": "cypress\\e2e\\landing.cy.ts",
+      "file": "cypress\\e2e\\landing.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "17d7e9c0-1cd9-4fa0-ad4a-c73a0027dcc2",
+          "title": "Landing Page",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [],
+          "suites": [
+            {
+              "uuid": "777e5c02-8b8f-42e3-bff5-63641c37e04f",
+              "title": "Hero Section",
+              "fullFile": "",
+              "file": "",
+              "beforeHooks": [],
+              "afterHooks": [],
+              "tests": [
+                {
+                  "title": "Hero contains correct information",
+                  "fullTitle": "Landing Page Hero Section Hero contains correct information",
+                  "timedOut": null,
+                  "duration": 875,
+                  "state": "failed",
+                  "speed": null,
+                  "pass": false,
+                  "fail": true,
+                  "pending": false,
+                  "context": null,
+                  "code": "cy.get('h1').contains('Welcome to GradeMaster!');\ncy.get('button').eq(0).contains('Login');",
+                  "err": {
+                    "message": "CypressError: `cy.visit()` failed trying to load:\n\nhttp://localhost:3000/\n\nThe response we received from your web server was:\n\n  > 500: Internal Server Error\n\nThis was considered a failure because the status code was not `2xx`.\n\nIf you do not want status codes to cause failures pass the option: `failOnStatusCode: false`\n\nBecause this error occurred during a `before each` hook we are skipping the remaining tests in the current suite: `Landing Page`",
+                    "estack": "CypressError: `cy.visit()` failed trying to load:\n\nhttp://localhost:3000/\n\nThe response we received from your web server was:\n\n  > 500: Internal Server Error\n\nThis was considered a failure because the status code was not `2xx`.\n\nIf you do not want status codes to cause failures pass the option: `failOnStatusCode: false`\n\nBecause this error occurred during a `before each` hook we are skipping the remaining tests in the current suite: `Landing Page`\n    at <unknown> (http://localhost:3000/__cypress/runner/cypress_runner.js:131464:76)\n    at visitFailedByErr (http://localhost:3000/__cypress/runner/cypress_runner.js:130878:12)\n    at <unknown> (http://localhost:3000/__cypress/runner/cypress_runner.js:131447:13)\n    at tryCatcher (http://localhost:3000/__cypress/runner/cypress_runner.js:1807:23)\n    at Promise._settlePromiseFromHandler (http://localhost:3000/__cypress/runner/cypress_runner.js:1519:31)\n    at Promise._settlePromise (http://localhost:3000/__cypress/runner/cypress_runner.js:1576:18)\n    at Promise._settlePromise0 (http://localhost:3000/__cypress/runner/cypress_runner.js:1621:10)\n    at Promise._settlePromises (http://localhost:3000/__cypress/runner/cypress_runner.js:1697:18)\n    at _drainQueueStep (http://localhost:3000/__cypress/runner/cypress_runner.js:2407:12)\n    at _drainQueue (http://localhost:3000/__cypress/runner/cypress_runner.js:2400:9)\n    at Async._drainQueues (http://localhost:3000/__cypress/runner/cypress_runner.js:2416:5)\n    at Async.drainQueues (http://localhost:3000/__cypress/runner/cypress_runner.js:2286:14)\nFrom Your Spec Code:\n    at Context.eval (webpack://grademaster/./cypress/e2e/landing.cy.ts:3:0)",
+                    "diff": null
+                  },
+                  "uuid": "c82d4cc4-a716-4e8e-9943-88a274c82de6",
+                  "parentUUID": "777e5c02-8b8f-42e3-bff5-63641c37e04f",
+                  "isHook": false,
+                  "skipped": false
+                }
+              ],
+              "suites": [],
+              "passes": [],
+              "failures": [
+                "c82d4cc4-a716-4e8e-9943-88a274c82de6"
+              ],
+              "pending": [],
+              "skipped": [],
+              "duration": 875,
+              "root": false,
+              "rootEmpty": false,
+              "_timeout": 2000
+            },
+            {
+              "uuid": "14826b4a-edb1-4bb5-a74f-4c27b12734d2",
+              "title": "Call to Action",
+              "fullFile": "",
+              "file": "",
+              "beforeHooks": [],
+              "afterHooks": [],
+              "tests": [
+                {
+                  "title": "New User information",
+                  "fullTitle": "Landing Page Call to Action New User information",
+                  "timedOut": null,
+                  "duration": 0,
+                  "state": "skipped",
+                  "speed": null,
+                  "pass": false,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "",
+                  "err": {},
+                  "uuid": "67212ee8-d4ba-4cbf-acaa-cc246071e41d",
+                  "parentUUID": null,
+                  "isHook": false,
+                  "skipped": true
+                }
+              ],
+              "suites": [],
+              "passes": [],
+              "failures": [],
+              "pending": [],
+              "skipped": [
+                "67212ee8-d4ba-4cbf-acaa-cc246071e41d"
+              ],
+              "duration": 0,
+              "root": false,
+              "rootEmpty": false,
+              "_timeout": 2000
+            },
+            {
+              "uuid": "a504282a-fb82-49ad-82db-eaabfd940ae7",
+              "title": "Social Proof",
+              "fullFile": "",
+              "file": "",
+              "beforeHooks": [],
+              "afterHooks": [],
+              "tests": [
+                {
+                  "title": "Contains social proof",
+                  "fullTitle": "Landing Page Social Proof Contains social proof",
+                  "timedOut": null,
+                  "duration": 0,
+                  "state": "skipped",
+                  "speed": null,
+                  "pass": false,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "",
+                  "err": {},
+                  "uuid": "ac138f31-6ede-4016-b636-9caaeb8f4e63",
+                  "parentUUID": null,
+                  "isHook": false,
+                  "skipped": true
+                }
+              ],
+              "suites": [],
+              "passes": [],
+              "failures": [],
+              "pending": [],
+              "skipped": [
+                "ac138f31-6ede-4016-b636-9caaeb8f4e63"
+              ],
+              "duration": 0,
+              "root": false,
+              "rootEmpty": false,
+              "_timeout": 2000
+            },
+            {
+              "uuid": "517a5990-91dd-4cd5-ae1a-22e9b928accd",
+              "title": "Benefits",
+              "fullFile": "",
+              "file": "",
+              "beforeHooks": [],
+              "afterHooks": [],
+              "tests": [
+                {
+                  "title": "Contains Benefits",
+                  "fullTitle": "Landing Page Benefits Contains Benefits",
+                  "timedOut": null,
+                  "duration": 0,
+                  "state": "skipped",
+                  "speed": null,
+                  "pass": false,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "",
+                  "err": {},
+                  "uuid": "7ea948ed-da25-45fa-9549-011bc286ea8e",
+                  "parentUUID": null,
+                  "isHook": false,
+                  "skipped": true
+                }
+              ],
+              "suites": [],
+              "passes": [],
+              "failures": [],
+              "pending": [],
+              "skipped": [
+                "7ea948ed-da25-45fa-9549-011bc286ea8e"
+              ],
+              "duration": 0,
+              "root": false,
+              "rootEmpty": false,
+              "_timeout": 2000
+            },
+            {
+              "uuid": "3fadec3e-47b7-430a-ad8c-c8482f68f4bd",
+              "title": "Features",
+              "fullFile": "",
+              "file": "",
+              "beforeHooks": [],
+              "afterHooks": [],
+              "tests": [
+                {
+                  "title": "Contains features",
+                  "fullTitle": "Landing Page Features Contains features",
+                  "timedOut": null,
+                  "duration": 0,
+                  "state": "skipped",
+                  "speed": null,
+                  "pass": false,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "",
+                  "err": {},
+                  "uuid": "65f4f49e-991f-4ffc-b788-3a14dd2d3af0",
+                  "parentUUID": null,
+                  "isHook": false,
+                  "skipped": true
+                }
+              ],
+              "suites": [],
+              "passes": [],
+              "failures": [],
+              "pending": [],
+              "skipped": [
+                "65f4f49e-991f-4ffc-b788-3a14dd2d3af0"
+              ],
+              "duration": 0,
+              "root": false,
+              "rootEmpty": false,
+              "_timeout": 2000
+            }
+          ],
+          "passes": [],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 0,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/report/mochawesome-report",
+        "overwrite": false,
+        "html": false,
+        "json": true,
+        "timestamp": "mmddyyyy_HHMMss"
+      },
+      "version": "6.2.0"
+    }
+  }
+}

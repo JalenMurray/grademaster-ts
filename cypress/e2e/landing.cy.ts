@@ -1,6 +1,7 @@
-let storageCache;
-
 describe('Landing Page', () => {
+  beforeEach(() => {
+    cy.visit('/');
+  });
   // before(() => {
   //   cy.authenticate().then((_) => {
   //     storageCache = { ...localStorage };
@@ -18,9 +19,25 @@ describe('Landing Page', () => {
 
   context('Hero Section', () => {
     it('Hero contains correct information', () => {
-      cy.visit('/');
       cy.get('h1').contains('Welcome to GradeMaster!');
+      cy.get('button').eq(0).contains('Login');
     });
+  });
+
+  context('Call to Action', () => {
+    it('New User information', () => {});
+  });
+
+  context('Social Proof', () => {
+    it('Contains social proof', () => {});
+  });
+
+  context('Benefits', () => {
+    it('Contains Benefits', () => {});
+  });
+
+  context('Features', () => {
+    it('Contains features', () => {});
   });
 
   // context('Navbar', () => {

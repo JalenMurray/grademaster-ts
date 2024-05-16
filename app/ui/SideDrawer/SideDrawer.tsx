@@ -23,7 +23,7 @@ export default async function SideDrawer() {
   };
 
   return (
-    <div className="drawer-side z-40 border-r-2 border-neutral">
+    <div className="drawer-side z-40 border-r-2 border-neutral pb-20">
       <label htmlFor="my-drawer-2" aria-label="close sidebar" className="drawer-overlay" />
       <aside className="min-h-screen w-80">
         <div className="sticky top-0 z-20 mb-4 pb-4" id="brand">
@@ -43,7 +43,9 @@ export default async function SideDrawer() {
             <h2 className="menu-title">Semesters</h2>
             <ul>
               <li>
-                <OpenModalButton buttonText="New Semester" modalId="new_semester_modal" />
+                <OpenModalButton modalId="new_semester_modal" btnClasses="btn-ghost group">
+                  New Semester
+                </OpenModalButton>
               </li>
               {semesters.sort(sortSemesters).map((semester) => (
                 <li key={semester.id}>

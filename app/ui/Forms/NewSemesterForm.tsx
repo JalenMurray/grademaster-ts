@@ -25,8 +25,10 @@ export default function NewSemesterForm() {
   }
 
   return (
-    <form action={createSemester} onSubmit={handleSubmit}>
-      <h3 className="font-bold text-lg">New Semester</h3>
+    <form action={createSemester} onSubmit={handleSubmit} data-test="newSemesterForm">
+      <h3 className="font-bold text-lg" data-test="formTitle">
+        New Semester
+      </h3>
       <div>
         <label className="form-control w-full max-w-xs">
           <div className="label">
@@ -37,10 +39,10 @@ export default function NewSemesterForm() {
             className="select select-bordered w-full max-w-xs"
             defaultValue={getDefaultSemester()}
           >
+            <option value="Winter">Winter</option>
             <option value="Spring">Spring</option>
             <option value="Summer">Summer</option>
             <option value="Fall">Fall</option>
-            <option value="Winter">Winter</option>
           </select>
         </label>
         <label className="form-control w-full max-w-xs">

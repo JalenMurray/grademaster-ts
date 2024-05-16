@@ -1,5 +1,3 @@
-// components/Logout.tsx
-
 'use client';
 
 import { signOut } from 'aws-amplify/auth';
@@ -12,7 +10,7 @@ export default function Logout() {
     <button
       onClick={async () => {
         await signOut();
-        router.push('/login');
+        router.push('/');
       }}
       className="px-2 bg-white text-black"
     >

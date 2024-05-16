@@ -1,10 +1,9 @@
-// app/login/page.tsx - Custom <Authenticator>
-
 'use client';
 
 import { Authenticator, View, useAuthenticator, Image, useTheme } from '@aws-amplify/ui-react';
 import { redirect } from 'next/navigation';
 import { useEffect } from 'react';
+import { fetchAuthSession } from 'aws-amplify/auth';
 
 const components = {
   Header() {
@@ -22,6 +21,10 @@ function CustomAuthenticator() {
   const { user } = useAuthenticator((context) => [context.user]);
 
   useEffect(() => {
+    async function checkSession() {
+      const session = await fetchAuthSession();
+      console.log(session);
+    }
     if (user) {
       redirect('/');
     }

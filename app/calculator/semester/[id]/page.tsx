@@ -2,6 +2,7 @@ import type { Class, Semester } from '@/app/lib/definitions';
 import { cookiesClient } from '@/app/utils/amplify-utils';
 import ClassCard from '@/app/ui/SemesterPage/ClassCard';
 import { AddCircleOutline, Delete, Edit } from '@mui/icons-material';
+import OpenModalButton from '@/app/ui/OpenModalButton';
 
 async function getData(id) {
   const { data: semesters } = await cookiesClient.models.Semester.get(
@@ -23,15 +24,19 @@ export default async function Page({ params }: { params: { id: string } }) {
         {semester.season} {semester.year}
       </h1>
       <h2 className="mt-4 text-2xl flex gap-4 align-center">Actions</h2>
-      <div className="mt-2 flex gap-3 w-full">
+      <div className="mt-2 flex gap-3 w-full" data-test="actionButtons">
         <button className="btn btn-neutral">
           <Edit />
           Edit Semester
         </button>
-        <button className="btn btn-success text-white">
+        <OpenModalButton
+          modalId="new_class_modal"
+          btnClasses="btn btn-success text-white"
+          extraVariable={{ name: 'semester', value: semester.id }}
+        >
           <AddCircleOutline />
           New Class
-        </button>
+        </OpenModalButton>
         <button className="btn btn-error text-white">
           <Delete />
           Delete Semester

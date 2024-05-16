@@ -1,12 +1,14 @@
 'use client';
 
 export default function OpenModalButton({
-  buttonText,
+  children,
   modalId,
+  btnClasses,
   extraVariable,
 }: {
-  buttonText: string;
+  children: React.ReactNode;
   modalId: string;
+  btnClasses: string;
   extraVariable?: {
     name: string;
     value: string;
@@ -23,8 +25,8 @@ export default function OpenModalButton({
   }
 
   return (
-    <button className="btn btn-ghost group" onClick={handleClick}>
-      {buttonText}
+    <button data-test="openModalButton" className={`btn ${btnClasses}`} onClick={handleClick}>
+      {children}
     </button>
   );
 }

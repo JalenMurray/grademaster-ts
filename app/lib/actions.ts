@@ -3,6 +3,7 @@
 import { z } from 'zod';
 import { cookiesClient } from '../utils/amplify-utils';
 import { revalidatePath } from 'next/cache';
+import { Class } from './definitions';
 
 const SemesterFormSchema = z.object({
   id: z.string(),
@@ -45,7 +46,7 @@ export async function createClass(formData: FormData) {
     units: formData.get('units'),
     displayColor: formData.get('displayColor'),
     semesterId: formData.get('semesterId'),
-  });
+  }) as Class;
   await cookiesClient.models.Class.create(newClass);
   revalidatePath('/calculator');
 }

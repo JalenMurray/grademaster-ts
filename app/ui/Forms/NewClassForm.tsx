@@ -32,11 +32,10 @@ export default function NewClassForm() {
   }
 
   return (
-    <form action={createClass} onSubmit={handleSubmit}>
-      <input hidden name="semesterId" id="new_class_modal_semester" />
+    <form action={createClass} onSubmit={handleSubmit} data-test="newClassForm">
+      <input className="hidden" name="semesterId" id="new_class_modal_semester" />
       <h3 className="font-bold text-lg">New Class</h3>
       <div className="w-full">
-        <input id="new_class_modal_semester" hidden />
         <label className="form-control w-full">
           <div className="label">
             <span className="label-text">Code</span>

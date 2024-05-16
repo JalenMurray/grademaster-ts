@@ -1,5 +1,3 @@
-// app/login/page.tsx
-
 import Login from '@/app/utils/Login';
 
 export default function LoginPage() {

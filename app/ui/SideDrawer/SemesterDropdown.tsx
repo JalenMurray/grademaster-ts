@@ -6,8 +6,12 @@ import OpenModalButton from '../OpenModalButton';
 export default async function SemesterDropdown({ semester }: { semester: Semester }) {
   const { data: classes } = await semester.classes();
 
+  const sortClasses = (a, b) => {
+    return a.code.localeCompare(b.code);
+  };
+
   return (
-    <details id={semester.id}>
+    <details id={semester.id} data-test="semesterDropdown">
       <summary className="group">
         {semester.season} {semester.year}
       </summary>
@@ -17,12 +21,14 @@ export default async function SemesterDropdown({ semester }: { semester: Semeste
         </li>
         <li>
           <OpenModalButton
-            buttonText="New Class"
             modalId="new_class_modal"
+            btnClasses="btn-ghost group"
             extraVariable={{ name: 'semester', value: semester.id }}
-          />
+          >
+            New Class
+          </OpenModalButton>
         </li>
-        {classes.map((cls) => (
+        {classes.sort(sortClasses).map((cls) => (
           <li key={cls.id} className="group">
             <Link href={`/calculator/class/${cls.id}`}>
               <span>{cls.code}</span>

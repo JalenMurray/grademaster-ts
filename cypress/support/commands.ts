@@ -37,14 +37,15 @@
 // }
 
 import { Amplify } from 'aws-amplify';
-import { SignInOutput, signIn } from 'aws-amplify/auth';
+import { SignInOutput, signIn, getCurrentUser } from 'aws-amplify/auth';
 import outputs from '../../amplify_outputs.json';
-Amplify.configure(outputs);
+Amplify.configure(outputs, { ssr: true });
 
 declare global {
   namespace Cypress {
     interface Chainable {
-      authenticate(): Promise<boolean>;
+      authenticate(): Promise<SignInOutput>;
+      getByData(dataTestAttribute: string, extras?: string): Chainable<JQuery<HTMLElement>>;
     }
   }
 }
@@ -54,5 +55,9 @@ Cypress.Commands.add('authenticate', async () => {
     username: Cypress.env('cognito_username'),
     password: Cypress.env('cognito_password'),
   });
-  return output.isSignedIn;
+  return output;
+});
+
+Cypress.Commands.add('getByData', (selector, extras) => {
+  return extras ? cy.get(`[data-test=${selector}] ${extras}`) : cy.get(`[data-test=${selector}]`);
 });
