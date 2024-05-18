@@ -9,7 +9,7 @@ export default function ClassCard({ cls }: { cls: Class }) {
       </figure>
       <div className="card-body">
         <h2 className="card-title">{cls.code}</h2>
-        <p className="text-sm sm:text-base">{cls.title}</p>
+        <p className="text-sm sm:text-base">{cls.name}</p>
         <div className="card-actions justify-end">
           <Link href={`/calculator/class/${cls.id}`}>
             <button className="btn btn-sm sm:btn-md btn-accent">View Class</button>

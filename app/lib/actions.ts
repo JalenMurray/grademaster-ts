@@ -50,3 +50,33 @@ export async function createClass(formData: FormData) {
   await cookiesClient.models.Class.create(newClass);
   revalidatePath('/calculator');
 }
+
+const AssignmentTypeFormSchema = z.object({
+  id: z.string(),
+  name: z.string(),
+  defaultName: z.string(),
+  maxScore: z.coerce.number(),
+  weight: z.coerce.number(),
+  lockWeights: z.coerce.boolean(),
+  totalScore: z.number(),
+  maxTotalScore: z.number(),
+  classId: z.string(),
+});
+
+const CreateAssignmentType = AssignmentTypeFormSchema.omit({ id: true });
+
+export async function createAssignmentType(formData: FormData) {
+  const weight = formData.get('lockWeights') === 'on' ? formData.get('weight') : '0';
+  const newAssignmentType = CreateAssignmentType.parse({
+    name: formData.get('name'),
+    defaultName: formData.get('defaultName'),
+    maxScore: formData.get('maxScore'),
+    lockWeights: formData.get('lockWeights'),
+    weight,
+    totalScore: 0,
+    maxTotalScore: 0,
+    classId: formData.get('classId'),
+  }) as Class;
+  await cookiesClient.models.AssignmentType.create(newAssignmentType);
+  revalidatePath('/calculator');
+}

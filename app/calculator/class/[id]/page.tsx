@@ -3,6 +3,8 @@ import { cookiesClient } from '@/app/utils/amplify-utils';
 import ClassCard from '@/app/ui/SemesterPage/ClassCard';
 import { AddCircleOutline, Delete, Edit } from '@mui/icons-material';
 import GradeCalculator from '@/app/ui/ClassPage/GradeCalculator';
+import { getSemesterStr } from '@/app/utils/format';
+import OpenModalButton from '@/app/ui/OpenModalButton';
 
 async function getData(id) {
   const { data: cls } = await cookiesClient.models.Class.get({ id });
@@ -14,19 +16,27 @@ export default async function Page({ params }: { params: { id: string } }) {
   const { data: assignmentTypes } = await cls.assignmentTypes();
   const { data: semester } = await cls.semester();
 
-  console.log('CLS ', cls);
-  console.log('Class Score', cls.score);
+  /*
+    Need to correctly format class and assignmentTypes here so that functions are not passed to the client components
+  */
+  // Remove assignmentTypes and semester functions from class
+  const { assignmentTypes: removedFn1, semester: removedFn2, ...formattedCls } = cls;
+  // Remove assignments and class functions from assignmentTypes
+  const formattedAssignmentTypes = assignmentTypes.map((at) => {
+    const { assignments: removedFn3, class: removedFn4, ...formattedAt } = at;
+    return formattedAt;
+  });
 
   return (
     <div className="w-full max-w-7xl flex-grow pt-10">
       <h1 className="text-5xl" style={{ color: cls.displayColor }}>
         {cls.code}
-        {/* <span className="text-xl text-neutral-600">
-          {semester.season} {semester.year}
+        {/* <span className="text-xl text-neutral-600 ml-3">
+          {getSemesterStr(semester as Semester)}
         </span> */}
       </h1>
       <h1 className="text-3xl mt-2" style={{ color: cls.displayColor }}>
-        {cls.title}
+        {cls.name}
       </h1>
       <h2 className="mt-6 text-2xl flex gap-4 align-center">Actions</h2>
       <div className="mt-2 flex gap-3 w-full">
@@ -34,18 +44,24 @@ export default async function Page({ params }: { params: { id: string } }) {
           <Edit />
           Edit Class
         </button>
-        <button className="btn btn-success text-white">
+        <OpenModalButton
+          modalId="new_assignment_type_modal"
+          btnClasses="btn-success text-white"
+          extraVariable={{ name: 'class', value: cls.id }}
+        >
           <AddCircleOutline />
           New Assignment Type
-        </button>
+        </OpenModalButton>
         <button className="btn btn-error text-white">
           <Delete />
           Delete Class
         </button>
       </div>
       <GradeCalculator
-        score={cls.score}
-        assignmentTypes={assignmentTypes as Array<AssignmentType>}
+        serverVariables={{
+          cls: formattedCls as Class,
+          assignmentTypes: formattedAssignmentTypes as Array<AssignmentType>,
+        }}
       />
     </div>
   );

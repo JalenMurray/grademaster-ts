@@ -16,3 +16,9 @@ input[type='number']::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
+
+@layer components {
+  .class-button {
+    @apply btn rounded-xl flex gap-2 text-white;
+  }
+}
