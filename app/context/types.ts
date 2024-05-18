@@ -1,7 +1,7 @@
-import { AssignmentType, Class } from '../lib/definitions';
+import { Class, csAssignmentType } from '../lib/definitions';
 
 export type AssignmentTypes = {
-  [assignmentTypeId: string]: AssignmentType;
+  [assignmentTypeId: string]: csAssignmentType;
 };
 
 export type Warning = {

@@ -3,7 +3,7 @@
 import { z } from 'zod';
 import { cookiesClient } from '../utils/amplify-utils';
 import { revalidatePath } from 'next/cache';
-import { Class } from './definitions';
+import { Assignment, Class } from './definitions';
 
 const SemesterFormSchema = z.object({
   id: z.string(),
@@ -78,5 +78,16 @@ export async function createAssignmentType(formData: FormData) {
     classId: formData.get('classId'),
   }) as Class;
   await cookiesClient.models.AssignmentType.create(newAssignmentType);
+  revalidatePath('/calculator');
+}
+
+export async function createAssignment(newAssignment: {
+  name: string;
+  score: number;
+  maxScore: number;
+  weight: number;
+  assignmentTypeId: string;
+}) {
+  await cookiesClient.models.Assignment.create(newAssignment as Assignment);
   revalidatePath('/calculator');
 }

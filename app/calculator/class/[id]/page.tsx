@@ -1,4 +1,4 @@
-import type { AssignmentType, Class, Semester } from '@/app/lib/definitions';
+import type { csAssignmentType as atType, Class, Semester } from '@/app/lib/definitions';
 import { cookiesClient } from '@/app/utils/amplify-utils';
 import ClassCard from '@/app/ui/SemesterPage/ClassCard';
 import { AddCircleOutline, Delete, Edit } from '@mui/icons-material';
@@ -22,10 +22,26 @@ export default async function Page({ params }: { params: { id: string } }) {
   // Remove assignmentTypes and semester functions from class
   const { assignmentTypes: removedFn1, semester: removedFn2, ...formattedCls } = cls;
   // Remove assignments and class functions from assignmentTypes
-  const formattedAssignmentTypes = assignmentTypes.map((at) => {
-    const { assignments: removedFn3, class: removedFn4, ...formattedAt } = at;
-    return formattedAt;
-  });
+  // Add assignments to assignment Types
+  const formattedAssignmentTypes = await Promise.all(
+    assignmentTypes.map(async (at) => {
+      const { data: fetchedAssignments } = await at.assignments();
+      const assignments = fetchedAssignments.map((a) => ({
+        id: a.id,
+        name: a.name,
+        score: a.score,
+        maxScore: a.maxScore,
+        weight: a.weight,
+        assignmentTypeId: at.id,
+      }));
+      const { assignments: removedFn3, class: removedFn4, ...formattedAt } = at;
+      const assignmentType = {
+        ...formattedAt,
+        assignments,
+      };
+      return assignmentType;
+    })
+  );
 
   return (
     <div className="w-full max-w-7xl flex-grow pt-10">
@@ -60,7 +76,7 @@ export default async function Page({ params }: { params: { id: string } }) {
       <GradeCalculator
         serverVariables={{
           cls: formattedCls as Class,
-          assignmentTypes: formattedAssignmentTypes as Array<AssignmentType>,
+          assignmentTypes: formattedAssignmentTypes as Array<atType>,
         }}
       />
     </div>

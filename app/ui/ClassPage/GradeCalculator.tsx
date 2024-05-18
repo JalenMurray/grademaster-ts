@@ -1,10 +1,14 @@
 'use client';
 
-import { AssignmentType as atType, Class } from '@/app/lib/definitions';
+import { csAssignmentType as atType, Class, csAssignment as aType } from '@/app/lib/definitions';
 import ProgressBar from './ProgressBar';
 import { useClassContext } from '@/app/context/class';
 import { useEffect } from 'react';
 import AssignmentType from './AssignmentType';
+import { generateClient } from 'aws-amplify/api';
+import { Schema } from '@/amplify/data/resource';
+
+const client = generateClient<Schema>();
 
 export default function GradeCalculator({
   serverVariables,
@@ -19,7 +23,7 @@ export default function GradeCalculator({
   useEffect(() => {
     setCls(serverVariables.cls);
     let atsObject = {};
-    serverVariables.assignmentTypes.forEach((at) => {
+    serverVariables.assignmentTypes.forEach((at, i) => {
       atsObject[at.id] = at;
     });
     setAssignmentTypes(atsObject);
@@ -27,7 +31,7 @@ export default function GradeCalculator({
 
   return (
     <div data-type="gradeCalculator">
-      <ProgressBar score={cls.score} />
+      <ProgressBar score={cls?.score || 0} />
       <div
         className="mt-4 mb-[8rem] flex flex-col gap-6"
         id="assignment-types"

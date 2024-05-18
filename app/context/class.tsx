@@ -1,30 +1,11 @@
 'use client';
 
 import { createContext, useEffect, useState, useContext, ReactNode } from 'react';
-import {
-  ClassContextType,
-  Class,
-  AssignmentTypes,
-  AssignmentType,
-  Assignment,
-  Warning,
-} from './types';
-
-const INITIAL_CLASS: Class = {
-  code: '',
-  title: '',
-  desiredScore: 100.0,
-  units: 3,
-  displayColor: '#FF0000',
-  score: 100,
-  semester: {
-    season: '',
-    year: 2000,
-  },
-};
+import { ClassContextType, AssignmentTypes, Warning } from './types';
+import { Class, csAssignmentType } from '../lib/definitions';
 
 const ClassContext = createContext<ClassContextType>({
-  cls: INITIAL_CLASS,
+  cls: null,
   setCls: () => null,
   assignmentTypes: null,
   setAssignmentTypes: () => null,
@@ -32,21 +13,19 @@ const ClassContext = createContext<ClassContextType>({
 });
 
 export function ClassProvider({ children }: { children: React.ReactNode }): JSX.Element {
-  const [cls, setCls] = useState<Class>(INITIAL_CLASS);
+  const [cls, setCls] = useState<Class>(null);
   const [assignmentTypes, setAssignmentTypes] = useState<AssignmentTypes>({});
   const [warnings, setWarnings] = useState([]);
 
-  useEffect(() => {
-    console.log('Updating Class Score');
-    const newScore = assignmentTypes
-      ? Object.values(assignmentTypes).reduce(
-          (acc: number, at: AssignmentType) => acc + at.totalScore,
-          0
-        )
-      : 0;
-    const toUpdate = { score: newScore };
-    setCls((prevCls) => ({ ...prevCls, ...toUpdate }));
-  }, [assignmentTypes]);
+  // useEffect(() => {
+  // const newScore = assignmentTypes
+  //   ? Object.values(assignmentTypes).reduce(
+  //       (acc: number, at: csAssignmentType) => acc + at.totalScore,
+  //       0
+  //     )
+  //   : 0;
+  //   const toUpdate = { score: newScore };
+  // }, [assignmentTypes]);
 
   return (
     <ClassContext.Provider value={{ cls, setCls, assignmentTypes, setAssignmentTypes, warnings }}>
