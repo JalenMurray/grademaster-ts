@@ -1,4 +1,9 @@
-import type { csAssignmentType as atType, Class, Semester } from '@/app/lib/definitions';
+import type {
+  csAssignmentType as atType,
+  Class,
+  csAssignment as aType,
+  Semester,
+} from '@/app/lib/definitions';
 import { cookiesClient } from '@/app/utils/amplify-utils';
 import ClassCard from '@/app/ui/SemesterPage/ClassCard';
 import { AddCircleOutline, Delete, Edit } from '@mui/icons-material';
@@ -26,20 +31,12 @@ export default async function Page({ params }: { params: { id: string } }) {
   const formattedAssignmentTypes = await Promise.all(
     assignmentTypes.map(async (at) => {
       const { data: fetchedAssignments } = await at.assignments();
-      const assignments = fetchedAssignments.map((a) => ({
-        id: a.id,
-        name: a.name,
-        score: a.score,
-        maxScore: a.maxScore,
-        weight: a.weight,
-        assignmentTypeId: at.id,
-      }));
-      const { assignments: removedFn3, class: removedFn4, ...formattedAt } = at;
-      const assignmentType = {
-        ...formattedAt,
-        assignments,
-      };
-      return assignmentType;
+      const assignments = fetchedAssignments.map((a) => {
+        const { assignmentType: removedFn, ...assignment } = a;
+        return assignment as aType;
+      });
+      const { assignments: removedFn2, class: removedFn3, ...assignmentType } = at;
+      return { ...assignmentType, assignments } as atType;
     })
   );
 

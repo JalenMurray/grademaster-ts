@@ -63,7 +63,7 @@ const AssignmentTypeFormSchema = z.object({
   classId: z.string(),
 });
 
-const CreateAssignmentType = AssignmentTypeFormSchema.omit({ id: true });
+export const CreateAssignmentType = AssignmentTypeFormSchema.omit({ id: true });
 
 export async function createAssignmentType(formData: FormData) {
   const weight = formData.get('lockWeights') === 'on' ? formData.get('weight') : '0';
@@ -81,6 +81,17 @@ export async function createAssignmentType(formData: FormData) {
   revalidatePath('/calculator');
 }
 
+const AssignmentFormSchema = z.object({
+  id: z.string(),
+  name: z.string(),
+  score: z.coerce.number(),
+  maxScore: z.coerce.number(),
+  weight: z.coerce.number(),
+  assignmentTypeId: z.string(),
+});
+
+const CreateAssignment = AssignmentFormSchema.omit({ id: true });
+
 export async function createAssignment(newAssignment: {
   name: string;
   score: number;
@@ -88,6 +99,10 @@ export async function createAssignment(newAssignment: {
   weight: number;
   assignmentTypeId: string;
 }) {
-  await cookiesClient.models.Assignment.create(newAssignment as Assignment);
-  revalidatePath('/calculator');
+  const aFormData = CreateAssignment.parse({
+    ...newAssignment,
+  }) as Assignment;
+  const result = await cookiesClient.models.Assignment.create(aFormData);
+  console.log('RESULT', result);
+  return result;
 }

@@ -9,7 +9,6 @@ specifies that any user authenticated via an API key can "create", "read",
 const schema = a
   .schema({
     Assignment: a.model({
-      assignmentId: a.id().required(),
       name: a.string().required(),
       score: a.float().required(),
       maxScore: a.float().required(),

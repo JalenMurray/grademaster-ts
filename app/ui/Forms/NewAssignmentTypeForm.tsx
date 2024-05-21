@@ -1,9 +1,13 @@
 'use client';
 
-import { createAssignmentType } from '@/app/lib/actions';
+import { useClassContext } from '@/app/context/class';
+import { AssignmentType } from '@/app/context/types';
+import { CreateAssignmentType, createAssignmentType } from '@/app/lib/actions';
 import { useState } from 'react';
+import { v4 as uuid } from 'uuid';
 
-export default function NewAssignmentTypeForm() {
+export default function NewAssignmentTypeForm({ guest }: { guest?: boolean }) {
+  const { addAssignmentType } = useClassContext();
   const [locked, setLocked] = useState(true);
 
   function handleSubmit() {
@@ -11,8 +15,28 @@ export default function NewAssignmentTypeForm() {
     modal.close();
   }
 
+  function guestCreateAssignment(formData: FormData) {
+    const weight = formData.get('lockWeights') === 'on' ? +formData.get('weight').toString() : 0;
+    const newAssignmentType: AssignmentType = {
+      id: uuid(),
+      name: formData.get('name').toString(),
+      defaultName: formData.get('defaultName').toString(),
+      maxScore: +formData.get('maxScore').toString(),
+      lockWeights: formData.get('lockWeights')?.toString() === 'on' || false,
+      weight,
+      totalScore: 0,
+      maxTotalScore: 0,
+      assignments: [],
+    };
+    addAssignmentType(newAssignmentType);
+  }
+
   return (
-    <form action={createAssignmentType} onSubmit={handleSubmit} data-test="newAssignmentTypeForm">
+    <form
+      action={guest ? guestCreateAssignment : createAssignmentType}
+      onSubmit={handleSubmit}
+      data-test="newAssignmentTypeForm"
+    >
       <input className="hidden" name="classId" id="new_assignment_type_modal_class" />
       <h3 className="font-bold text-lg">New Assignment Type</h3>
       <div className="w-full">

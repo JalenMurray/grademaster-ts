@@ -9,17 +9,17 @@ export type Class = Schema['Class']['type'];
 export type AssignmentType = Schema['AssignmentType']['type'];
 export type Assignment = Schema['Assignment']['type'];
 
-// Client Side Types
-export type csAssignment = {
+// Interfaces
+export interface csAssignment {
   id?: string;
   name: string;
   score: number;
   maxScore: number;
   weight: number;
   assignmentTypeId: string;
-};
+}
 
-export type csAssignmentType = {
+export interface csAssignmentType {
   id: string;
   name: string;
   maxScore: number;
@@ -29,4 +29,11 @@ export type csAssignmentType = {
   totalScore: number;
   maxTotalScore: number;
   assignments: Array<csAssignment>;
+}
+
+// Assignment Callback Fn
+export type AssignmentCallback = {
+  onChange: (id: string, toUpdate: { [name: string]: string }) => void;
+  onBlur: () => void;
+  onDelete: (id: string) => void;
 };

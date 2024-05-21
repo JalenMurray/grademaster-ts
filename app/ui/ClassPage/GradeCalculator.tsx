@@ -13,7 +13,7 @@ const client = generateClient<Schema>();
 export default function GradeCalculator({
   serverVariables,
 }: {
-  serverVariables: {
+  serverVariables?: {
     cls: Class;
     assignmentTypes: Array<atType>;
   };
@@ -21,12 +21,15 @@ export default function GradeCalculator({
   const { cls, setCls, assignmentTypes, setAssignmentTypes } = useClassContext();
 
   useEffect(() => {
-    setCls(serverVariables.cls);
-    let atsObject = {};
-    serverVariables.assignmentTypes.forEach((at, i) => {
-      atsObject[at.id] = at;
-    });
-    setAssignmentTypes(atsObject);
+    // if (serverVariables) {
+    //   setCls(serverVariables.cls);
+    //   console.log(serverVariables);
+    //   let atsObject = {};
+    //   serverVariables.assignmentTypes.forEach((at, i) => {
+    //     atsObject[at.id] = at;
+    //   });
+    //   setAssignmentTypes(atsObject);
+    // }
   }, []);
 
   return (
@@ -38,7 +41,7 @@ export default function GradeCalculator({
         data-test="assignmentTypes"
       >
         {Object.values(assignmentTypes).map((at) => (
-          <AssignmentType at={at} />
+          <AssignmentType key={at.id} at={at} />
         ))}
       </div>
     </div>
