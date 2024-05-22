@@ -69,7 +69,7 @@ export default function ClassHeader() {
         data-test="desiredScore"
       >
         {desiredScoreReached ? (
-          <h3 className="text-green-500 px-4 py-5">You've reached your desired score!</h3>
+          <h3 className="text-green-500 px-4 py-5">You&apos;ve reached your desired score!</h3>
         ) : (
           <p className="px-4 py-5">
             Distance from desired score:
