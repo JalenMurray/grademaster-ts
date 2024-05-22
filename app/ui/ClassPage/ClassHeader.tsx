@@ -1,6 +1,6 @@
 'use client';
 
-import { AddCircleOutline, Delete, Edit } from '@mui/icons-material';
+import { AddCircleOutline, Delete, Edit, ImportExport } from '@mui/icons-material';
 import OpenModalButton from '../OpenModalButton';
 import { useClassContext } from '@/app/context/class';
 import { AssignmentType } from '@/app/context/types';
@@ -57,6 +57,10 @@ export default function ClassHeader() {
         >
           <AddCircleOutline />
           New Assignment Type
+        </OpenModalButton>
+        <OpenModalButton modalId="import_export_modal" btnClasses="btn-info text-white">
+          <ImportExport />
+          Import / Export
         </OpenModalButton>
         {!isGuest && (
           <button className="btn btn-error text-white">

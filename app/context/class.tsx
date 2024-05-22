@@ -11,7 +11,6 @@ import {
   Warnings,
 } from './types';
 import { v4 as uuid } from 'uuid';
-import { at } from 'lodash';
 
 export const ClassContext = createContext<ClassContextType>({
   cls: null,
@@ -31,6 +30,7 @@ export const ClassContext = createContext<ClassContextType>({
   addAssignmentType: (assignmentType: AssignmentType) => null,
   deleteAssignmentType: (atId: string) => null,
   updateAssignmentType: (atId: string, toUpdate: { name: string; value: string | number }) => null,
+  exportClass: () => null,
 });
 
 const INITIAL_CLASS: Class = {
@@ -204,6 +204,11 @@ export function ClassProvider({ children }: { children: React.ReactNode }): JSX.
     setIsGuest(true);
   }
 
+  function exportClass() {
+    const assignmentTypesArray = Object.values(assignmentTypes);
+    return { ...cls, assignmentTypes: assignmentTypesArray };
+  }
+
   const value = {
     cls,
     setCls,
@@ -218,6 +223,7 @@ export function ClassProvider({ children }: { children: React.ReactNode }): JSX.
     deleteAssignmentType,
     updateAssignment,
     updateAssignmentType,
+    exportClass,
   };
 
   return <ClassContext.Provider value={value}>{children}</ClassContext.Provider>;

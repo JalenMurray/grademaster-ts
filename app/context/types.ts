@@ -40,6 +40,10 @@ export type Warnings = {
   [warningName: string]: Warning;
 };
 
+export type ClassJSON = Class & {
+  assignmentTypes: Array<AssignmentType>;
+};
+
 export type ClassContextType = {
   cls: Class;
   setCls: (cls: Class) => void;
@@ -61,4 +65,5 @@ export type ClassContextType = {
     atId: string,
     toUpdate: { name: string; value: string | number | boolean }
   ) => void;
+  exportClass: () => ClassJSON;
 };

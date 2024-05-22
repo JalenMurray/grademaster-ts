@@ -9,6 +9,7 @@ import NewSemesterForm from '../ui/Forms/NewSemesterForm';
 import NewClassForm from '../ui/Forms/NewClassForm';
 import NewAssignmentTypeForm from '../ui/Forms/NewAssignmentTypeForm';
 import EditClassForm from '../ui/Forms/EditClassForm';
+import ImportExportModal from '../ui/ClassPage/ImportExportModal';
 
 export default function Page() {
   const { createGuestClass } = useContext(ClassContext);
@@ -29,6 +30,7 @@ export default function Page() {
       <BaseModal id="edit_class_modal" otherProps="items-center">
         <EditClassForm />
       </BaseModal>
+      <ImportExportModal />
     </div>
   );
 }
