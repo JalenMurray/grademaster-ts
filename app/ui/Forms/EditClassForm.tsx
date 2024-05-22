@@ -1,5 +1,8 @@
 'use client';
 
+import { useClassContext } from '@/app/context/class';
+import { Class } from '@/app/context/types';
+import clsx from 'clsx';
 import { TwitterPicker } from 'react-color';
 
 const currentDate = new Date();
@@ -18,9 +21,10 @@ function getDefaultSemester(): string {
   }
 }
 
-export default function EditClassForm({ guest }: { guest?: boolean }) {
+export default function EditClassForm() {
+  const { cls, setCls, isGuest } = useClassContext();
   function handleSubmit() {
-    const modal = document.getElementById('new_class_modal') as HTMLDialogElement;
+    const modal = document.getElementById('edit_class_modal') as HTMLDialogElement;
     modal.close();
   }
 
@@ -30,12 +34,19 @@ export default function EditClassForm({ guest }: { guest?: boolean }) {
     colorInput.value = value;
   }
 
-  function csUpdateClass() {}
+  function guestUpdateClass(formData: FormData) {
+    const toUpdate = {
+      code: formData.get('code').toString(),
+      name: formData.get('name').toString(),
+      desiredScore: +formData.get('desiredScore').toString(),
+      displayColor: formData.get('displayColor').toString(),
+    };
+    setCls({ ...cls, ...toUpdate });
+  }
 
   return (
-    <form action={csUpdateClass} onSubmit={handleSubmit} data-test="newClassForm">
-      <input className="hidden" name="semesterId" id="new_class_modal_semester" />
-      <h3 className="font-bold text-lg">New Class</h3>
+    <form action={guestUpdateClass} onSubmit={handleSubmit} data-test="editClassForm">
+      <h3 className="font-bold text-lg">Update Class</h3>
       <div className="w-full">
         <label className="form-control w-full">
           <div className="label">
@@ -46,6 +57,7 @@ export default function EditClassForm({ guest }: { guest?: boolean }) {
             type="text"
             className="input input-bordered w-full"
             placeholder="e.g CMSC420, MATH140, HIST100"
+            defaultValue={cls.code}
             onFocus={(e) => e.target.select()}
           />
         </label>
@@ -58,6 +70,7 @@ export default function EditClassForm({ guest }: { guest?: boolean }) {
             type="text"
             className="input input-bordered w-full"
             placeholder="e.g Intro to Calculus, Data Structures, Algorithms"
+            defaultValue={cls.name}
             onFocus={(e) => e.target.select()}
           />
         </label>
@@ -67,29 +80,38 @@ export default function EditClassForm({ guest }: { guest?: boolean }) {
           </div>
           <input
             name="desiredScore"
-            defaultValue={100}
+            defaultValue={cls.desiredScore}
             type="number"
             className="input input-bordered w-full"
           />
         </label>
-        <label className="form-control w-full">
-          <div className="label">
-            <span className="label-text">Units</span>
-          </div>
-          <input
-            name="units"
-            defaultValue={3}
-            type="number"
-            className="input input-bordered w-full"
-            onFocus={(e) => e.target.select()}
-          />
-        </label>
+        {!isGuest && (
+          <label className="form-control w-full">
+            <div className="label">
+              <span className="label-text">Units</span>
+            </div>
+            <input
+              name="units"
+              defaultValue={3}
+              type="number"
+              className="input input-bordered w-full"
+              onFocus={(e) => e.target.select()}
+            />
+          </label>
+        )}
+
         <label className="form-control w-full">
           <div className="label">
             <span className="label-text">Display Color</span>
           </div>
-          <input hidden name="displayColor" id="display-color-string" />
+          <input
+            hidden
+            name="displayColor"
+            id="display-color-string"
+            defaultValue={cls.displayColor}
+          />
           <TwitterPicker
+            color={cls.displayColor}
             onChangeComplete={handleColorChange}
             width="100%"
             triangle="hide"

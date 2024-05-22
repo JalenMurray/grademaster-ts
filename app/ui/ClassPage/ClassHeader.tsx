@@ -15,10 +15,10 @@ export default function ClassHeader() {
       </h1>
       <h2 className="text-2xl">Actions</h2>
       <div className="mt-2 flex gap-3 w-full" data-test="actionButtons">
-        <button className="btn btn-neutral">
+        <OpenModalButton modalId="edit_class_modal" btnClasses="btn-neutral">
           <Edit />
           Edit Class
-        </button>
+        </OpenModalButton>
         <OpenModalButton
           modalId="new_assignment_type_modal"
           btnClasses="btn-success text-white"
