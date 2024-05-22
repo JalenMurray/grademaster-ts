@@ -6,6 +6,7 @@ import { useClassContext } from '@/app/context/class';
 import { AssignmentType } from '@/app/context/types';
 import { useEffect, useState } from 'react';
 import { formatFloat } from '@/app/utils/format';
+import { ClassHeaderSkeleton } from './Skeletons';
 
 const COLOR_ZONES = ['#FF0000', '#FFC100', '#FFFF00', '#D6FF00', '#63FF00'];
 
@@ -36,7 +37,9 @@ export default function ClassHeader() {
     setDesiredScoreReached(distance <= 0);
   }, [cls]);
 
-  return (
+  return cls.code === 'CLASS100' ? (
+    <ClassHeaderSkeleton />
+  ) : (
     <>
       <h1 className="text-5xl" style={{ color: cls.displayColor }}>
         {cls.code} <br /> <span className="text-3xl">{cls.name}</span>

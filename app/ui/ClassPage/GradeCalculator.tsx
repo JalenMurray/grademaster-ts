@@ -8,6 +8,7 @@ import AssignmentType from './AssignmentType';
 import { generateClient } from 'aws-amplify/api';
 import { Schema } from '@/amplify/data/resource';
 import Warnings from './Warnings';
+import { GradeCalculatorSkeleton } from './Skeletons';
 
 const client = generateClient<Schema>();
 
@@ -33,7 +34,9 @@ export default function GradeCalculator({
     // }
   }, []);
 
-  return (
+  return cls.code === 'CLASS100' ? (
+    <GradeCalculatorSkeleton />
+  ) : (
     <div data-test="gradeCalculator">
       <Warnings />
       <ProgressBar score={cls?.score || 0} />

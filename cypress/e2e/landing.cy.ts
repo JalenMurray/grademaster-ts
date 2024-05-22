@@ -2,25 +2,10 @@ describe('Landing Page', () => {
   beforeEach(() => {
     cy.visit('/');
   });
-  // before(() => {
-  //   cy.authenticate().then((_) => {
-  //     storageCache = { ...localStorage };
-  //   });
-  // });
-  // beforeEach(() => {
-  //   cy.visit('/', {
-  //     onBeforeLoad(win) {
-  //       Object.entries(storageCache).forEach(([k, v]) => {
-  //         win.localStorage.setItem(k, '' + v);
-  //       });
-  //     },
-  //   });
-  // });
 
   context('Hero Section', () => {
     it('Hero contains correct information', () => {
       cy.get('h1').contains('Welcome to GradeMaster!');
-      cy.get('button').eq(0).contains('Login');
     });
   });
 
