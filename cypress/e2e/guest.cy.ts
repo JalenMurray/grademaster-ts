@@ -1,10 +1,39 @@
+const ASSIGNMENT_TYPES = [
+  {
+    name: 'Quizzes',
+    maxScore: 25,
+    defaultName: 'Quiz',
+    lockWeights: true,
+    weight: 15,
+  },
+  {
+    name: 'Homework',
+    maxScore: 10,
+    defaultName: 'HW',
+    lockWeights: true,
+    weight: 10,
+  },
+  {
+    name: 'Projects',
+    maxScore: 100,
+    defaultName: 'Project',
+    lockWeights: false,
+  },
+  {
+    name: 'Exams',
+    maxScore: 50,
+    defaultName: 'Exam',
+    lockWeights: false,
+  },
+];
+
 describe('Guest Page', () => {
-  before(() => {
+  beforeEach(() => {
     cy.visit('/guest');
-    cy.wait(300);
+    cy.wait(100);
   });
 
-  context.only('Header', () => {
+  context('Header', () => {
     it('Code and class name are correct', () => {
       cy.get('h1').contains('GUEST100');
       cy.get('h1 span').contains('Guest Class');
@@ -34,7 +63,7 @@ describe('Guest Page', () => {
       cy.get('h1 span').contains('Object-Orientated Programming I');
       cy.getByData('desiredScore', 'span').contains('70');
     });
-    it.only('New Assignment Type button works', () => {
+    it('New Assignment Type button works', () => {
       cy.get('#new_assignment_type_modal').should('not.be.visible');
       cy.getByData('actionButtons', 'button').eq(1).click();
       cy.get('#new_assignment_type_modal').should('be.visible');
@@ -48,10 +77,65 @@ describe('Guest Page', () => {
   });
 
   context('Grade Calculator', () => {
-    context('Assignment Type', () => {
-      it('Assignment types are listed correctly', () => {});
-      it('Assignment types dropdown works', () => {});
-      it('Correct assignment type beginning information is shown', () => {});
+    context.only('Assignment Type', () => {
+      it.only('Assignment types are listed correctly with correct information', () => {
+        ASSIGNMENT_TYPES.forEach((at) => {
+          cy.addAssignmentType(at);
+        });
+
+        // Quizzes
+        cy.getByData('assignmentTypes', 'details').eq(0).contains('Quizzes').click();
+        cy.getByData('Quizzes-buttons', 'button').eq(0).contains('New Assignment');
+        cy.getByData('Quizzes-buttons', 'button').eq(1).contains('Unlock Weights');
+        cy.getByData('Quizzes-buttons', 'button').eq(2).contains('Delete Assignment Type');
+        cy.getByData('Quizzes-info', 'h3')
+          .eq(0)
+          .contains('Total Weight:')
+          .children('input')
+          .should('have.value', '15');
+        cy.getByData('Quizzes-info', 'h3').eq(1).contains('Weighted Score: 0/0');
+        cy.getByData('Quizzes-info', 'h3').eq(2).contains('Lost Points: 0');
+        cy.getByData('Quizzes-assignmentsTable', 'th').each((th, i) => {
+          const HEADERS = ['Name', 'Score', 'Weight', 'Weighted Score', 'Lost Points'];
+          cy.wrap(th).contains(HEADERS[i]);
+        });
+        cy.getByData('Quizzes-assignments', 'tr').should('have.length', 0);
+
+        // Homework
+        cy.getByData('assignmentTypes', 'details').eq(1).contains('Homework').click();
+        cy.getByData('Homework-info', 'h3')
+          .eq(0)
+          .contains('Total Weight:')
+          .children('input')
+          .should('have.value', '10');
+        cy.getByData('Homework-info', 'h3').eq(1).contains('Weighted Score: 0/0');
+        cy.getByData('Homework-info', 'h3').eq(2).contains('Lost Points: 0');
+        cy.getByData('Homework-assignments', 'tr').should('have.length', 0);
+
+        // Projects
+        cy.getByData('assignmentTypes', 'details').eq(2).contains('Projects').click();
+        cy.getByData('Projects-info', 'h3')
+          .eq(0)
+          .contains('Total Weight:')
+          .children('span')
+          .eq(0)
+          .contains(0);
+        cy.getByData('Projects-info', 'h3').eq(1).contains('Weighted Score: 0/0');
+        cy.getByData('Projects-info', 'h3').eq(2).contains('Lost Points: 0');
+        cy.getByData('Projects-assignments', 'tr').should('have.length', 0);
+
+        // Exams
+        cy.getByData('assignmentTypes', 'details').eq(3).contains('Exams').click();
+        cy.getByData('Exams-info', 'h3')
+          .eq(0)
+          .contains('Total Weight:')
+          .children('span')
+          .eq(0)
+          .contains(0);
+        cy.getByData('Exams-info', 'h3').eq(1).contains('Weighted Score: 0/0');
+        cy.getByData('Exams-info', 'h3').eq(2).contains('Lost Points: 0');
+        cy.getByData('Exams-assignments', 'tr').should('have.length', 0);
+      });
       it('Able to edit assignment type name and weight, when applicable', () => {});
       it('New Assignment button works', () => {});
       it('Lock Weights button works', () => {});

@@ -42,12 +42,21 @@ import outputs from '../../amplify_outputs.json';
 import hexRgb from 'hex-rgb';
 Amplify.configure(outputs, { ssr: true });
 
+type AssignmentTypeInput = {
+  name: string;
+  maxScore: number;
+  defaultName: string;
+  lockWeights: boolean;
+  weight?: number;
+};
+
 declare global {
   namespace Cypress {
     interface Chainable {
       authenticate(): Promise<SignInOutput>;
       getByData(dataTestAttribute: string, extras?: string): Chainable<JQuery<HTMLElement>>;
       textColorIs(hex: string): boolean;
+      addAssignmentType(assignmentType: AssignmentTypeInput);
     }
   }
 }
@@ -68,4 +77,18 @@ Cypress.Commands.add('textColorIs', { prevSubject: true }, (subject, hex) => {
   const rgb = hexRgb(hex);
   const rgbStr = `rgb(${rgb.red}, ${rgb.green}, ${rgb.blue})`;
   expect(rgbStr).to.eq(subject[0].style.color);
+});
+
+Cypress.Commands.add('addAssignmentType', (assignmentType: AssignmentTypeInput) => {
+  const { name, maxScore, defaultName, lockWeights, weight } = assignmentType;
+  cy.getByData('actionButtons', 'button').eq(1).click();
+  cy.getByData('newAssignmentTypeForm', 'input').eq(1).type(name);
+  cy.getByData('newAssignmentTypeForm', 'input').eq(2).type(maxScore.toString());
+  cy.getByData('newAssignmentTypeForm', 'input').eq(3).type(defaultName);
+  if (lockWeights) {
+    cy.getByData('newAssignmentTypeForm', 'input').eq(5).type(weight.toString());
+  } else {
+    cy.getByData('newAssignmentTypeForm', 'input').eq(4).click();
+  }
+  cy.getByData('newAssignmentTypeForm', 'button').click();
 });

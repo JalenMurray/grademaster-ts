@@ -15,8 +15,6 @@ function WarningCard({ warning }: { warning: Warning }) {
 export default function Warnings() {
   const { warnings } = useClassContext();
 
-  console.log('Warnings', warnings);
-
   return (
     <div className="mt-8" data-test="warnings">
       {Object.values(warnings).map((warning: Warning) => (

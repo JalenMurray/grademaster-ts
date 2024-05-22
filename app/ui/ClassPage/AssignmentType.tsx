@@ -64,7 +64,7 @@ export default function AssignmentType({ at }: { at: atType }) {
       <summary className="collapse-title text-4xl font-medium">{at.name}</summary>
       <div className="collapse-content">
         <div className="flex flex-col py-6">
-          <div className="flex gap-2" id={`${at.id}-buttons`}>
+          <div className="flex gap-2" data-test={`${at.name}-buttons`}>
             <form onSubmit={handleAddAssignment}>
               <button className="btn-success class-button" type="submit">
                 <AddCircleOutline />
@@ -80,8 +80,8 @@ export default function AssignmentType({ at }: { at: atType }) {
               <p>Delete Assignment Type</p>
             </button>
           </div>
-          <div className="flex gap-4 pt-4 text-2xl">
-            <h1>
+          <div className="flex gap-4 pt-4 text-2xl" data-test={`${at.name}-info`}>
+            <h3>
               Total Weight:
               {at.lockWeights ? (
                 <input
@@ -95,18 +95,18 @@ export default function AssignmentType({ at }: { at: atType }) {
               ) : (
                 <span className="input input-ghost w-[4.5rem] mx-2 text-xl">{at.weight}</span>
               )}
-            </h1>
+            </h3>
             <div className="divider divider-horizontal" />
-            <h1>
+            <h3>
               Weighted Score: {formatFloat(at.totalScore, 2) || 0}/
               {formatFloat(at.maxTotalScore, 2) || 0}
-            </h1>
+            </h3>
             <div className="divider divider-horizontal" />
-            <h1>Lost Points: {formatFloat(lostPoints, 2) || 0}</h1>
+            <h3>Lost Points: {formatFloat(lostPoints, 2) || 0}</h3>
           </div>
         </div>
         <div className="overflow-x-auto">
-          <table className="table text-xl">
+          <table className="table text-xl" data-test={`${at.name}-assignmentsTable`}>
             <thead>
               <tr>
                 <th>Name</th>
@@ -116,7 +116,7 @@ export default function AssignmentType({ at }: { at: atType }) {
                 <th>Lost Points</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody data-test={`${at.name}-assignments`}>
               {at.assignments.map((assignment, i) => (
                 <tr key={assignment.id}>
                   <Assignment assignment={assignment} atId={at.id} />
