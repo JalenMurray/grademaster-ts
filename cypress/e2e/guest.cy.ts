@@ -14,8 +14,37 @@ describe('Guest Page', () => {
       cy.getByData('actionButtons', 'button').eq(0).contains('Edit Class');
       cy.getByData('actionButtons', 'button').eq(1).contains('New Assignment Type');
     });
-    it.only('Edit class button works', () => {});
-    it('New Assignment Type button works', () => {});
+    it('Edit class button works', () => {
+      cy.get('h1').contains('GUEST100').textColorIs('#FF0000');
+      cy.get('h1 span').contains('Guest Class');
+      cy.getByData('desiredScore', 'span').contains('100');
+      cy.get('#edit_class_modal').should('not.be.visible');
+      cy.getByData('actionButtons', 'button').eq(0).click();
+      cy.get('#edit_class_modal').should('be.visible');
+      cy.getByData('editClassForm', 'input').eq(0).type('CMSC131');
+      cy.getByData('editClassForm', 'input').eq(1).type('Object-Orientated Programming I');
+      cy.getByData('editClassForm', 'input').eq(2).type('70');
+      cy.getByData('editClassForm', 'input')
+        .eq(3)
+        .then((input) => {
+          input[0].setAttribute('value', '#0000FF');
+        });
+      cy.getByData('editClassForm', 'button').click();
+      cy.get('h1').contains('CMSC131').textColorIs('#0000FF');
+      cy.get('h1 span').contains('Object-Orientated Programming I');
+      cy.getByData('desiredScore', 'span').contains('70');
+    });
+    it.only('New Assignment Type button works', () => {
+      cy.get('#new_assignment_type_modal').should('not.be.visible');
+      cy.getByData('actionButtons', 'button').eq(1).click();
+      cy.get('#new_assignment_type_modal').should('be.visible');
+      cy.getByData('newAssignmentTypeForm', 'input').eq(1).type('Quizzes');
+      cy.getByData('newAssignmentTypeForm', 'input').eq(2).type('10');
+      cy.getByData('newAssignmentTypeForm', 'input').eq(3).type('Quiz');
+      cy.getByData('newAssignmentTypeForm', 'input').eq(5).type('20');
+      cy.getByData('newAssignmentTypeForm', 'button').click();
+      cy.getByData('assignmentTypes').eq(0).contains('Quizzes');
+    });
   });
 
   context('Grade Calculator', () => {
@@ -53,6 +82,11 @@ describe('Guest Page', () => {
     context('Warnings', () => {
       it('Shows correct warnings', () => {});
       it('Warnings are removed when applicable', () => {});
+    });
+
+    context('Desired Score', () => {
+      it('Shows correct distance', () => {});
+      it('Shows success message if desired score was reached', () => {});
     });
   });
 });

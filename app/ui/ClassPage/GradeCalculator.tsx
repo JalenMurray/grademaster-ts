@@ -34,7 +34,7 @@ export default function GradeCalculator({
   }, []);
 
   return (
-    <div data-type="gradeCalculator">
+    <div data-test="gradeCalculator">
       <Warnings />
       <ProgressBar score={cls?.score || 0} />
       <div

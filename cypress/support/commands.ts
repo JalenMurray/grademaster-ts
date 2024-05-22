@@ -39,6 +39,7 @@
 import { Amplify } from 'aws-amplify';
 import { SignInOutput, signIn, getCurrentUser } from 'aws-amplify/auth';
 import outputs from '../../amplify_outputs.json';
+import hexRgb from 'hex-rgb';
 Amplify.configure(outputs, { ssr: true });
 
 declare global {
@@ -46,6 +47,7 @@ declare global {
     interface Chainable {
       authenticate(): Promise<SignInOutput>;
       getByData(dataTestAttribute: string, extras?: string): Chainable<JQuery<HTMLElement>>;
+      textColorIs(hex: string): boolean;
     }
   }
 }
@@ -60,4 +62,10 @@ Cypress.Commands.add('authenticate', async () => {
 
 Cypress.Commands.add('getByData', (selector, extras) => {
   return extras ? cy.get(`[data-test=${selector}] ${extras}`) : cy.get(`[data-test=${selector}]`);
+});
+
+Cypress.Commands.add('textColorIs', { prevSubject: true }, (subject, hex) => {
+  const rgb = hexRgb(hex);
+  const rgbStr = `rgb(${rgb.red}, ${rgb.green}, ${rgb.blue})`;
+  expect(rgbStr).to.eq(subject[0].style.color);
 });

@@ -83,6 +83,7 @@ export default function EditClassForm() {
             defaultValue={cls.desiredScore}
             type="number"
             className="input input-bordered w-full"
+            onFocus={(e) => e.target.select()}
           />
         </label>
         {!isGuest && (
@@ -100,7 +101,7 @@ export default function EditClassForm() {
           </label>
         )}
 
-        <label className="form-control w-full">
+        <label className="form-control w-full" data-test="colorPicker">
           <div className="label">
             <span className="label-text">Display Color</span>
           </div>

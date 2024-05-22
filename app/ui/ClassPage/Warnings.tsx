@@ -18,7 +18,7 @@ export default function Warnings() {
   console.log('Warnings', warnings);
 
   return (
-    <div className="mt-8">
+    <div className="mt-8" data-test="warnings">
       {Object.values(warnings).map((warning: Warning) => (
         <WarningCard key={warning.header} warning={warning} />
       ))}

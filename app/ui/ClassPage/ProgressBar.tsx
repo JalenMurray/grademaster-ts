@@ -23,7 +23,10 @@ function ProgressBar({ score }) {
   }, [score]);
 
   return (
-    <div className="w-full h-12 bg-white border-1 border-black rounded-[20px] mt-8">
+    <div
+      className="w-full h-12 bg-white border-1 border-black rounded-[20px] mt-8"
+      data-test="progressBar"
+    >
       <div
         className="h-full justify-center items-center text-center rounded-[20px]"
         style={{ backgroundColor: barColor, width: `${score}%`, maxWidth: '100%' }}

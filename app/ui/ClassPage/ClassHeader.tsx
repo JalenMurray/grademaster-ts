@@ -61,12 +61,15 @@ export default function ClassHeader() {
           </button>
         )}
       </div>
-      <div className="h-24 w-48 bg-info-content rounded-3xl text-center mt-4">
+      <div
+        className="h-24 w-48 bg-info-content rounded-3xl text-center mt-4"
+        data-test="desiredScore"
+      >
         {desiredScoreReached ? (
           <h3 className="text-green-500 px-4 py-5">You've reached your desired score!</h3>
         ) : (
           <p className="px-4 py-5">
-            Distance from desired score:{' '}
+            Distance from desired score:
             <span
               className="text-2xl"
               style={{ color: getDistanceColor(distanceFromDesiredScore) }}
