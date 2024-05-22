@@ -7,6 +7,7 @@ import { useEffect } from 'react';
 import AssignmentType from './AssignmentType';
 import { generateClient } from 'aws-amplify/api';
 import { Schema } from '@/amplify/data/resource';
+import Warnings from './Warnings';
 
 const client = generateClient<Schema>();
 
@@ -34,6 +35,7 @@ export default function GradeCalculator({
 
   return (
     <div data-type="gradeCalculator">
+      <Warnings />
       <ProgressBar score={cls?.score || 0} />
       <div
         className="mt-4 mb-[8rem] flex flex-col gap-6"

@@ -80,10 +80,6 @@ export function ClassProvider({ children }: { children: React.ReactNode }): JSX.
     }
   }, [assignmentTypes]);
 
-  useEffect(() => {
-    console.log('IN USE EFFECT CLASS CHANGED', cls);
-  }, [cls]);
-
   function balanceAssignments(assignments: Array<Assignment>, atWeight: number): Array<Assignment> {
     const weight = atWeight / assignments.length;
     const balancedAssignments = assignments.map((a) => ({ ...a, weight }));
@@ -204,9 +200,7 @@ export function ClassProvider({ children }: { children: React.ReactNode }): JSX.
       desiredScore: 100,
       displayColor: '#FF0000',
     };
-    console.log('SETTING UP GUEST CLASS', guestClass);
     setCls(guestClass);
-    console.log('Class Set! ');
     setIsGuest(true);
   }
 
