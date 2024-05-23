@@ -3,7 +3,7 @@ import { Warning } from '@/app/context/types';
 
 function WarningCard({ warning }: { warning: Warning }) {
   return (
-    <div className="card shadow-xl w-96 bg-red-500">
+    <div className="card shadow-xl md:w-96 w-48 text-xs md:text-base bg-red-500">
       <div className="card-body">
         <h2 className="card-title">{warning.header}</h2>
         <p>{warning.message}</p>

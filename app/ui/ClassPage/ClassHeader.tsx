@@ -47,7 +47,7 @@ export default function ClassHeader() {
       <h2 className="text-2xl">Actions</h2>
       <div className="mt-2 flex gap-3 w-full" data-test="actionButtons">
         <OpenModalButton modalId="edit_class_modal" btnClasses="btn-neutral">
-          <Edit />
+          <Edit fontSize="small" />
           Edit Class
         </OpenModalButton>
         <OpenModalButton
@@ -55,11 +55,14 @@ export default function ClassHeader() {
           btnClasses="btn-success text-white"
           extraVariable={{ name: 'class', value: cls.id }}
         >
-          <AddCircleOutline />
-          New Assignment Type
+          <AddCircleOutline fontSize="small" />
+          <div className="flex flex-col">
+            <p>New</p>
+            <p>Assignment Type</p>
+          </div>
         </OpenModalButton>
         <OpenModalButton modalId="import_export_modal" btnClasses="btn-info text-white">
-          <ImportExport />
+          <ImportExport fontSize="small" />
           Import / Export
         </OpenModalButton>
         {!isGuest && (
@@ -69,16 +72,16 @@ export default function ClassHeader() {
         )}
       </div>
       <div
-        className="h-24 w-48 bg-info-content rounded-3xl text-center mt-4"
+        className="h-20 md:h-24 w-32 md:w-48 bg-info-content rounded-3xl flex items-center text-center mt-4 text-xs"
         data-test="desiredScore"
       >
         {desiredScoreReached ? (
           <h3 className="text-green-500 px-4 py-5">You&apos;ve reached your desired score!</h3>
         ) : (
-          <p className="px-4 py-5">
+          <p className="px-1 py-2">
             Distance from desired score:
             <span
-              className="text-2xl"
+              className="text-lg md:text-2xl ml-1"
               style={{ color: getDistanceColor(distanceFromDesiredScore) }}
             >
               {formatFloat(distanceFromDesiredScore, 2)}

@@ -27,7 +27,6 @@ export default function AssignmentType({ at }: { at: atType }) {
   }
 
   async function handleAddAssignment(e) {
-    e.preventDefault();
     function getWeight(): number {
       return at.lockWeights ? at.weight / (at.assignments.length + 1) : 0;
     }
@@ -63,42 +62,58 @@ export default function AssignmentType({ at }: { at: atType }) {
     <details className="collapse collapse-arrow bg-base-200">
       <summary className="collapse-title text-4xl font-medium">{at.name}</summary>
       <div className="collapse-content">
-        <div className="flex flex-col py-6">
+        <div className="flex flex-col py-6 text-xs">
           <div className="flex gap-2" data-test={`${at.name}-buttons`}>
-            <form onSubmit={handleAddAssignment}>
-              <button className="btn-success class-button" type="submit">
-                <AddCircleOutline />
-                <p>New Assignment</p>
-              </button>
-            </form>
+            <button className="class-button btn-success" onClick={handleAddAssignment}>
+              <AddCircleOutline fontSize="small" />
+              <div className="flex flex-col">
+                <p>New</p>
+                <p>Assignment</p>
+              </div>
+            </button>
             <button className="btn-secondary class-button" onClick={handleToggleLockWeights}>
-              {at.lockWeights ? <LockOpenRounded /> : <Lock />}
-              <p>{at.lockWeights ? 'Unlock Weights' : 'Lock Weights'}</p>
+              {at.lockWeights ? <LockOpenRounded fontSize="small" /> : <Lock fontSize="small" />}
+              {at.lockWeights ? (
+                <div className="flex flex-col">
+                  <p>Unlock</p>
+                  <p>Weights</p>
+                </div>
+              ) : (
+                'Lock Weights'
+              )}
             </button>
             <button className="btn-error class-button" onClick={handleDeleteAssignmentType}>
-              <Delete />
-              <p>Delete Assignment Type</p>
+              <Delete fontSize="small" />
+              <div className="flex flex-col">
+                <p>Delete</p>
+                <p>Assignment Type</p>
+              </div>
             </button>
           </div>
-          <div className="flex gap-4 pt-4 text-2xl" data-test={`${at.name}-info`}>
+          <div
+            className="flex gap-1 md:gap-4 pt-4 text-xs md:text-2xl"
+            data-test={`${at.name}-info`}
+          >
             <h3>
-              Total Weight:
+              Total
+              <br /> Weight:
               {at.lockWeights ? (
                 <input
                   onFocus={(e) => e.target.select()}
                   onChange={handleChange}
                   name="weight"
                   value={formatFloat(at.weight, 2)}
-                  className="input input-ghost w-[4.5rem] mx-2 text-xl"
+                  className="input input-ghost w-12 md:w-[4.5rem] px-2 md:text-xl"
                   type="number"
                 />
               ) : (
-                <span className="input input-ghost w-[4.5rem] mx-2 text-xl">{at.weight}</span>
+                <span className="input input-ghost w-[4.5rem] mx-2 md:text-xl">{at.weight}</span>
               )}
             </h3>
             <div className="divider divider-horizontal" />
             <h3>
-              Weighted Score: {formatFloat(at.totalScore, 2) || 0}/
+              Weighted
+              <br /> Score: {formatFloat(at.totalScore, 2) || 0}/
               {formatFloat(at.maxTotalScore, 2) || 0}
             </h3>
             <div className="divider divider-horizontal" />
@@ -106,7 +121,10 @@ export default function AssignmentType({ at }: { at: atType }) {
           </div>
         </div>
         <div className="overflow-x-auto">
-          <table className="table text-xl" data-test={`${at.name}-assignmentsTable`}>
+          <table
+            className="table table-xs md:table-md text-xl"
+            data-test={`${at.name}-assignmentsTable`}
+          >
             <thead>
               <tr>
                 <th>Name</th>
