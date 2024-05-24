@@ -63,16 +63,16 @@ export default function AssignmentType({ at }: { at: atType }) {
       <summary className="collapse-title text-4xl font-medium">{at.name}</summary>
       <div className="collapse-content">
         <div className="flex flex-col py-6 text-xs">
-          <div className="flex gap-2" data-test={`${at.name}-buttons`}>
+          <div className="flex gap-3" data-test={`${at.name}-buttons`}>
             <button className="class-button btn-success" onClick={handleAddAssignment}>
-              <AddCircleOutline fontSize="small" />
+              <AddCircleOutline />
               <div className="flex flex-col">
                 <p>New</p>
                 <p>Assignment</p>
               </div>
             </button>
             <button className="btn-secondary class-button" onClick={handleToggleLockWeights}>
-              {at.lockWeights ? <LockOpenRounded fontSize="small" /> : <Lock fontSize="small" />}
+              {at.lockWeights ? <LockOpenRounded /> : <Lock />}
               {at.lockWeights ? (
                 <div className="flex flex-col">
                   <p>Unlock</p>
@@ -83,7 +83,7 @@ export default function AssignmentType({ at }: { at: atType }) {
               )}
             </button>
             <button className="btn-error class-button" onClick={handleDeleteAssignmentType}>
-              <Delete fontSize="small" />
+              <Delete />
               <div className="flex flex-col">
                 <p>Delete</p>
                 <p>Assignment Type</p>
@@ -91,19 +91,18 @@ export default function AssignmentType({ at }: { at: atType }) {
             </button>
           </div>
           <div
-            className="flex gap-1 md:gap-4 pt-4 text-xs md:text-2xl"
+            className="flex gap-1 md:gap-4 pt-4 text-xs md:text-2xl text-center items-center"
             data-test={`${at.name}-info`}
           >
             <h3>
-              Total
-              <br /> Weight:
+              Total Weight:
               {at.lockWeights ? (
                 <input
                   onFocus={(e) => e.target.select()}
                   onChange={handleChange}
                   name="weight"
                   value={formatFloat(at.weight, 2)}
-                  className="input input-ghost w-12 md:w-[4.5rem] px-2 md:text-xl"
+                  className="input input-ghost w-12 md:w-[4.5rem] px-2 ml-4 md:text-2xl"
                   type="number"
                 />
               ) : (
@@ -112,8 +111,7 @@ export default function AssignmentType({ at }: { at: atType }) {
             </h3>
             <div className="divider divider-horizontal" />
             <h3>
-              Weighted
-              <br /> Score: {formatFloat(at.totalScore, 2) || 0}/
+              Weighted Score: {formatFloat(at.totalScore, 2) || 0}/
               {formatFloat(at.maxTotalScore, 2) || 0}
             </h3>
             <div className="divider divider-horizontal" />

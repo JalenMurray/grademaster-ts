@@ -1,6 +1,6 @@
 'use client';
 
-import { AddCircleOutline, Delete, Edit, ImportExport } from '@mui/icons-material';
+import { AddCircleOutline, Delete, DocumentScanner, Edit, ImportExport } from '@mui/icons-material';
 import OpenModalButton from '../OpenModalButton';
 import { useClassContext } from '@/app/context/class';
 import { AssignmentType } from '@/app/context/types';
@@ -64,6 +64,10 @@ export default function ClassHeader() {
         <OpenModalButton modalId="import_export_modal" btnClasses="btn-info text-white">
           <ImportExport fontSize="small" />
           Import / Export
+        </OpenModalButton>
+        <OpenModalButton modalId="scan_syllabus_modal" btnClasses="btn-warning">
+          <DocumentScanner />
+          Scan Syllabus
         </OpenModalButton>
         {!isGuest && (
           <button className="btn btn-error text-white">

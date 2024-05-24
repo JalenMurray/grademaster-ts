@@ -54,7 +54,7 @@ export default function Assignment({ assignment, atId }: { assignment: aType; at
           onFocus={(e) => e.target.select()}
           name="name"
           value={assignment.name}
-          className="input input-ghost w-20"
+          className="input input-ghost w-20 md:w-52 md:text-2xl"
           onKeyDown={handleKeyPress}
           onChange={handleChange}
           onBlur={handleBlur}
@@ -65,7 +65,7 @@ export default function Assignment({ assignment, atId }: { assignment: aType; at
           onFocus={(e) => e.target.select()}
           name="score"
           value={assignment.score}
-          className="input input-ghost w-12 md:w-[4.5rem] mx-2"
+          className="input input-ghost w-12 md:w-[4.5rem] mx-2 md:text-2xl"
           onKeyDown={handleKeyPress}
           onChange={handleChange}
           onBlur={handleBlur}
@@ -76,7 +76,7 @@ export default function Assignment({ assignment, atId }: { assignment: aType; at
           onFocus={(e) => e.target.select()}
           name="maxScore"
           value={assignment.maxScore}
-          className="input input-ghost w-12 md:w-[4.5rem] mx-2"
+          className="input input-ghost w-12 md:w-[4.5rem] mx-2 md:text-2xl"
           onKeyDown={handleKeyPress}
           onChange={handleChange}
           onBlur={handleBlur}
@@ -85,7 +85,7 @@ export default function Assignment({ assignment, atId }: { assignment: aType; at
       </td>
       <td>
         {assignmentTypes[atId].lockWeights ? (
-          <span className="input input-ghost w-12 md:w-[4.5rem] mx-2">
+          <span className="input input-ghost w-12 md:w-[4.5rem] mx-2 md:text-2xl">
             {formatFloat(assignment.weight, 2)}
           </span>
         ) : (
@@ -93,7 +93,7 @@ export default function Assignment({ assignment, atId }: { assignment: aType; at
             onFocus={(e) => e.target.select()}
             name="weight"
             value={assignment.weight}
-            className="input input-ghost w-12 md:w-[4.5rem] mx-2"
+            className="input input-ghost w-12 md:w-[4.5rem] mx-2 md:text-2xl"
             onKeyDown={handleKeyPress}
             onChange={handleChange}
             onBlur={handleBlur}
@@ -101,8 +101,8 @@ export default function Assignment({ assignment, atId }: { assignment: aType; at
           />
         )}
       </td>
-      <td className="text-base">{formatFloat(weightedScore, 2) || 0}</td>
-      <td className="text-base">{formatFloat(lostPoints, 2) || 0}</td>
+      <td className="md:text-2xl">{formatFloat(weightedScore, 2) || 0}</td>
+      <td className="md:text-2xl">{formatFloat(lostPoints, 2) || 0}</td>
       <td>
         <button
           className="btn btn-error btn-sm text-white"

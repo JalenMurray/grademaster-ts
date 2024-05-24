@@ -7,6 +7,7 @@ import {
   AssignmentTypes,
   Class,
   ClassContextType,
+  ClassJSON,
   Warning,
   Warnings,
 } from './types';
@@ -31,6 +32,7 @@ export const ClassContext = createContext<ClassContextType>({
   deleteAssignmentType: (atId: string) => null,
   updateAssignmentType: (atId: string, toUpdate: { name: string; value: string | number }) => null,
   exportClass: () => null,
+  validateClassJSON: (jsonData: any) => null,
 });
 
 const INITIAL_CLASS: Class = {
@@ -61,7 +63,7 @@ export function ClassProvider({ children }: { children: React.ReactNode }): JSX.
 
     // Check warnings
     const clsWeight = Object.values(assignmentTypes).reduce(
-      (acc: number, at: AssignmentType) => acc + at.weight,
+      (acc: number, at: AssignmentType) => acc + +at.weight,
       0
     );
     if (clsWeight != 100) {
@@ -204,9 +206,87 @@ export function ClassProvider({ children }: { children: React.ReactNode }): JSX.
     setIsGuest(true);
   }
 
-  function exportClass() {
+  function exportClass(): ClassJSON {
     const assignmentTypesArray = Object.values(assignmentTypes);
     return { ...cls, assignmentTypes: assignmentTypesArray };
+  }
+
+  function validateClassJSON(jsonData: any): ClassJSON {
+    // For a json object to be considered valid it must give at least 3 valid variables
+    const fields = ['code', 'name', 'desiredScore', 'displayColor', 'assignmentTypes'];
+
+    const validFields = fields.filter((field) => jsonData.hasOwnProperty(field));
+
+    if (validFields.length < 3) {
+      throw new Error('Invalid JSON data.  At least three valid fields are required');
+    }
+
+    const defaultValues: ClassJSON = {
+      id: uuid(),
+      code: 'CLASS100',
+      name: 'Default Class Name',
+      score: 0,
+      desiredScore: 100,
+      displayColor: '#FF0000',
+      assignmentTypes: [],
+    };
+
+    const defaultAssignmentType: AssignmentType = {
+      id: uuid(),
+      name: 'Assignment Type',
+      maxScore: 100,
+      defaultName: 'Assignment',
+      weight: 0,
+      lockWeights: false,
+      totalScore: 0,
+      maxTotalScore: 0,
+      assignments: [],
+    };
+
+    const defaultAssignment: Assignment = {
+      id: uuid(),
+      name: 'Assignment',
+      score: 100,
+      maxScore: 100,
+      weight: 0,
+    };
+
+    const processedAts = jsonData.assignmentTypes
+      ? jsonData.assignmentTypes.map((at) => {
+          const processedAssignments = at.assignments
+            ? at.assignments.map((a) => ({
+                id: a.id || uuid(),
+                name: a.name || defaultAssignment.name,
+                score: +a.score || defaultAssignment.score,
+                maxScore: +a.maxScore || defaultAssignment.maxScore,
+                weight: +a.weight || defaultAssignment.weight,
+              }))
+            : [];
+          return {
+            id: at.id || uuid(),
+            name: at.name || defaultAssignmentType.name,
+            maxScore: +at.maxScore || defaultAssignmentType.maxScore,
+            defaultName: at.defaultName || defaultAssignmentType.defaultName,
+            weight: +at.weight || defaultAssignmentType.weight,
+            lockWeights: at.lockWeights || at.weight ? true : false,
+            totalScore: +at.totalScore || defaultAssignmentType.totalScore,
+            maxTotalScore: +at.maxTotalScore || defaultAssignmentType.maxTotalScore,
+            assignments: processedAssignments,
+          };
+        })
+      : [];
+
+    const processedData: ClassJSON = {
+      id: jsonData.id || defaultValues.id,
+      code: jsonData.code || defaultValues.code,
+      name: jsonData.name || defaultValues.name,
+      score: +jsonData.score || defaultValues.score,
+      desiredScore: +jsonData.desiredScore || defaultValues.desiredScore,
+      displayColor: jsonData.displayColor || defaultValues.displayColor,
+      assignmentTypes: processedAts,
+    };
+
+    return processedData;
   }
 
   const value = {
@@ -224,6 +304,7 @@ export function ClassProvider({ children }: { children: React.ReactNode }): JSX.
     updateAssignment,
     updateAssignmentType,
     exportClass,
+    validateClassJSON,
   };
 
   return <ClassContext.Provider value={value}>{children}</ClassContext.Provider>;

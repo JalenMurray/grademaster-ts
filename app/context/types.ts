@@ -66,4 +66,5 @@ export type ClassContextType = {
     toUpdate: { name: string; value: string | number | boolean }
   ) => void;
   exportClass: () => ClassJSON;
+  validateClassJSON: (jsonData: any) => ClassJSON;
 };

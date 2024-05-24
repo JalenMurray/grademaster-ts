@@ -10,6 +10,7 @@ import NewClassForm from '../ui/Forms/NewClassForm';
 import NewAssignmentTypeForm from '../ui/Forms/NewAssignmentTypeForm';
 import EditClassForm from '../ui/Forms/EditClassForm';
 import ImportExportModal from '../ui/ClassPage/ImportExportModal';
+import ScanSyllabusModal from '../ui/ClassPage/ScanSyllabusModal';
 
 export default function Page() {
   const { createGuestClass } = useContext(ClassContext);
@@ -31,6 +32,7 @@ export default function Page() {
         <EditClassForm />
       </BaseModal>
       <ImportExportModal />
+      <ScanSyllabusModal />
     </div>
   );
 }

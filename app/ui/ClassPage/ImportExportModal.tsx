@@ -5,54 +5,56 @@ import { ClassJSON } from '@/app/context/types';
 import { useEffect, useState } from 'react';
 import BaseModal from '../BaseModal';
 import clsx from 'clsx';
+import ClassPreview from './ClassPreview';
 
-type Status = 'importing' | 'exporting';
-
-// function FormattedClass({ cls }: { cls: ClassJSON }) {
-//   return (
-//     <>
-//       <p>{'{'}</p>
-//       <p className="ml-2">{`"id": "${cls.id}",`}</p>
-//       <p className="ml-2">{`"code": "${cls.code}",`}</p>
-//       <p className="ml-2">{`"name": "${cls.name}",`}</p>
-//       <p className="ml-2">{`"score": "${cls.score}",`}</p>
-//       <p className="ml-2">{`"desiredScore": "${cls.desiredScore}",`}</p>
-//       <p className="ml-2">{`"displayColor": "${cls.displayColor}",`}</p>
-//       <p className="ml-2">{`"assignmentTypes": {`}</p>
-//       {cls.assignmentTypes.map((at) => (<p></p>))}
-//       <p className="ml-2">{`"}`}</p>
-//       <p>{'}'}</p>
-//     </>
-//   );
-// }
+type Status = 'importing' | 'exporting' | 'validating';
 
 export default function ImportExportModal() {
-  const { cls, setCls, setAssignmentTypes, exportClass } = useClassContext();
+  const { cls, setCls, setAssignmentTypes, exportClass, validateClassJSON } = useClassContext();
   const [exported, setExported] = useState<ClassJSON>(null);
   const [status, setStatus] = useState<Status>('importing');
   const [toImport, setToImport] = useState<string>('');
   const [importError, setImportError] = useState<string>(undefined);
+  const [importJSON, setImportJSON] = useState<any>(undefined);
 
   function handleImportChange(e) {
     setToImport(e.target.value);
   }
 
-  function importClass() {
-    try {
-      const { assignmentTypes: importedAts, ...importedClass } = JSON.parse(toImport);
-      setCls(importedClass);
+  const importCallback = {
+    onSubmit: () => {
+      const { assignmentTypes: importedAts, ...importedClass } = importJSON;
       const assignmentTypes = importedAts.reduce((acc, obj) => {
         acc[obj.id] = { ...obj };
         return acc;
       }, {});
+      setCls(importedClass);
       setAssignmentTypes(assignmentTypes);
       const modal = document.getElementById('import_export_modal') as HTMLDialogElement;
       modal.close();
       setToImport('');
+      setStatus('importing');
       setImportError(undefined);
+    },
+    onCancel: () => {
+      setStatus('importing');
+    },
+  };
+
+  function importClass() {
+    try {
+      setStatus('validating');
+      const imported = JSON.parse(toImport);
+      const processedJSON = validateClassJSON(imported);
+      setImportJSON(processedJSON);
     } catch (err) {
-      setImportError('Invalid JSON provided');
+      if (err.message === 'Invalid JSON data.  At least three valid fields are required') {
+        setImportError(err.message);
+      } else {
+        setImportError('Invalid JSON provided');
+      }
       console.error(err);
+      setStatus('importing');
     }
   }
 
@@ -88,7 +90,7 @@ export default function ImportExportModal() {
           />
           <span className="label-text">Export</span>
         </label>
-        {status === 'importing' ? (
+        {status === 'importing' && (
           <>
             <label className="form-control">
               <div className="label">
@@ -106,7 +108,8 @@ export default function ImportExportModal() {
               Import
             </button>
           </>
-        ) : (
+        )}
+        {status === 'exporting' && (
           <div className="flex flex-col gap-4">
             <button
               className="btn bg-orange-500 hover:bg-orange-700 text-neutral"
@@ -119,6 +122,7 @@ export default function ImportExportModal() {
             </div>
           </div>
         )}
+        {status === 'validating' && <ClassPreview data={importJSON} callback={importCallback} />}
       </div>
     </BaseModal>
   );
