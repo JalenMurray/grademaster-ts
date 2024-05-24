@@ -63,8 +63,14 @@ export type ClassContextType = {
   deleteAssignmentType: (atId: string) => void;
   updateAssignmentType: (
     atId: string,
-    toUpdate: { name: string; value: string | number | boolean }
+    toUpdate: { name: string; value: string | number | boolean } | EditAssignmentTypeInput
   ) => void;
   exportClass: () => ClassJSON;
   validateClassJSON: (jsonData: any) => ClassJSON;
+};
+
+export type EditAssignmentTypeInput = {
+  name: string;
+  defaultName: string;
+  maxScore: number;
 };

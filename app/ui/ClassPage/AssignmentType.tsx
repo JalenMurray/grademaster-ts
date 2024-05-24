@@ -4,17 +4,19 @@ import { useState, useEffect } from 'react';
 import { useClassContext } from '@/app/context/class';
 import { Assignment as aType, AssignmentType as atType } from '@/app/context/types';
 import { formatFloat } from '@/app/utils/format';
-import { AddCircleOutline, LockOpenRounded, Lock, Delete } from '@mui/icons-material';
+import { AddCircleOutline, LockOpenRounded, Lock, Delete, Edit } from '@mui/icons-material';
 import Assignment from './Assignment';
 import { validateAssignmentType } from '@/app/utils/validate';
 import { v4 as uuid } from 'uuid';
+import BaseModal from '../BaseModal';
+import EditAssignmentTypeForm from '../Forms/EditAssignmentTypeForm';
+import OpenModalButton from '../OpenModalButton';
 
 export default function AssignmentType({ at }: { at: atType }) {
   const { addAssignment, updateAssignmentType, deleteAssignmentType } = useClassContext();
   const [lostPoints, setLostPoints] = useState<number>(at.maxTotalScore - at.totalScore);
 
   useEffect(() => {
-    console.log('LOST POINTS', lostPoints);
     setLostPoints(at.maxTotalScore - at.totalScore);
   }, [at, setLostPoints]);
 
@@ -64,6 +66,10 @@ export default function AssignmentType({ at }: { at: atType }) {
       <div className="collapse-content">
         <div className="flex flex-col py-6 text-xs">
           <div className="flex gap-3" data-test={`${at.name}-buttons`}>
+            <OpenModalButton modalId={`edit-${at.id}-modal`} btnClasses="class-button btn-neutral">
+              <Edit />
+              Edit Assignment Type
+            </OpenModalButton>
             <button className="class-button btn-success" onClick={handleAddAssignment}>
               <AddCircleOutline />
               <div className="flex flex-col">
@@ -142,6 +148,9 @@ export default function AssignmentType({ at }: { at: atType }) {
           </table>
         </div>
       </div>
+      <BaseModal id={`edit-${at.id}-modal`} otherProps={'items-center'}>
+        <EditAssignmentTypeForm at={at} />
+      </BaseModal>
     </details>
   );
 }

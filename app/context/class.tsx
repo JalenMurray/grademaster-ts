@@ -8,6 +8,7 @@ import {
   Class,
   ClassContextType,
   ClassJSON,
+  EditAssignmentTypeInput,
   Warning,
   Warnings,
 } from './types';
@@ -100,28 +101,38 @@ export function ClassProvider({ children }: { children: React.ReactNode }): JSX.
     return { totalScore, maxTotalScore };
   }
 
+  type SingleUpdateInput = {
+    name: string;
+    value: boolean | string | number;
+    assignments?: Array<Assignment>;
+  };
+
   function getUpdatedAssignmentType(
     id: string,
-    toUpdate: { name: string; value: boolean | string | number; assignments?: Array<Assignment> }
+    toUpdate: SingleUpdateInput | EditAssignmentTypeInput
   ): AssignmentType {
     const assignmentType = assignmentTypes[id];
-    const { name, value, assignments } = toUpdate;
-    if (
-      name === 'name' ||
-      name === 'maxScore' ||
-      name === 'desiredScore' ||
-      name === 'lockWeights'
-    ) {
-      return { ...assignmentType, [name]: value };
+    if ((toUpdate as EditAssignmentTypeInput).maxScore !== undefined) {
+      return { ...assignmentType, ...toUpdate };
     }
-    if (assignmentType.lockWeights) {
+    const { name, value, assignments } = toUpdate as SingleUpdateInput;
+    if (name === 'lockWeights' && !value) {
+      return { ...assignmentType, lockWeights: false };
+    }
+    if ((name === 'lockWeights' && value) || assignmentType.lockWeights) {
       const weight = name === 'weight' ? (value as number) : assignmentType.weight;
       const balancedAssignments = balanceAssignments(
         assignments || assignmentType.assignments,
         weight
       );
       const scores = getAssignmentTypeScores(balancedAssignments);
-      return { ...assignmentType, ...scores, assignments: balancedAssignments, weight };
+      return {
+        ...assignmentType,
+        ...scores,
+        assignments: balancedAssignments,
+        weight,
+        lockWeights: true,
+      };
     }
 
     if (name === 'weight') {
@@ -187,7 +198,7 @@ export function ClassProvider({ children }: { children: React.ReactNode }): JSX.
 
   function updateAssignmentType(
     atId: string,
-    toUpdate: { name: string; value: string | number | boolean }
+    toUpdate: { name: string; value: string | number | boolean } | EditAssignmentTypeInput
   ) {
     const updatedAt = getUpdatedAssignmentType(atId, toUpdate);
     setAssignmentTypes({ ...assignmentTypes, [atId]: updatedAt });
