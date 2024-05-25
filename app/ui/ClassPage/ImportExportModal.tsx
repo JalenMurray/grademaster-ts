@@ -110,16 +110,23 @@ export default function ImportExportModal() {
           </>
         )}
         {status === 'exporting' && (
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-4 text-center items-center">
             <button
               className="btn bg-orange-500 hover:bg-orange-700 text-neutral"
               onClick={downloadJSON}
             >
               Download JSON file
             </button>
-            <div className="w-96 h-fit p-4 border-black border-2 rounded-lg overflow-auto">
-              <p>{JSON.stringify(exported)}</p>
-            </div>
+            <h3>
+              This is the Class JSON text. Copy this and paste it into the import input to import
+              this class.
+            </h3>
+            <textarea
+              className="textarea textarea-bordered h-96 w-96"
+              readOnly
+              onClick={(e) => (e.target as HTMLTextAreaElement).select()}
+              value={JSON.stringify(exported)}
+            />
           </div>
         )}
         {status === 'validating' && <ClassPreview data={importJSON} callback={importCallback} />}

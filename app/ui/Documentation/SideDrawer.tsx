@@ -15,7 +15,7 @@ export default function SideDrawer() {
   return (
     <div className="drawer-side z-40">
       <label htmlFor="documentation-drawer" aria-label="close sidebar" className="drawer-overlay" />
-      <aside className="min-h-full w-80 bg-base-100">
+      <aside className="side-drawer">
         <div className="sticky top-0 z-20 mb-4 pb-4">
           <Brand />
         </div>
