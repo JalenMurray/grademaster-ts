@@ -13,3 +13,5 @@ export function formatFloat(num, n) {
   }
   return '';
 }
+
+export const linkClasses = 'text-blue-300 hover:text-blue-500';

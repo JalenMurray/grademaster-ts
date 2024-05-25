@@ -23,11 +23,16 @@ export default function App() {
           <p className="pb-6">
             GradeMaster is still currently in development, but the guest class feature is currently
             up and operational! With this you have access to the grade calculator feature of
-            GradeMaster but the data you add will not persist.
+            GradeMaster but the data you add will not persist. Documentation is also in the works.
           </p>
-          <Link href="/guest">
-            <button className="btn btn-primary text-lg text-neutral">Open Guest Class</button>
-          </Link>
+          <div className="flex gap-6">
+            <Link href="/guest">
+              <button className="btn btn-primary text-lg text-neutral">Guest Class</button>
+            </Link>
+            <Link href="/documentation">
+              <button className="btn btn-primary text-lg text-neutral">Documentation</button>
+            </Link>
+          </div>
         </div>
       </div>
     </div>
