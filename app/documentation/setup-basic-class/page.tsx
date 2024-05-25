@@ -51,10 +51,11 @@ export default function Page() {
           className="border-2 border-black my-4 rounded-xl"
         />
         <p>
-          From here you can select "Edit Class" which will open a dialog where you can change the
-          class code, name, desired score, and display color. As stated above, for this example I
-          will be using "CMSC131", which at UMD is "Object Orientated Programming I". In this case,
-          "CMSC131" would be the code and "Object Orientated Programming I" would be the name.
+          From here you can select &quot;Edit Class&quot; which will open a dialog where you can
+          change the class code, name, desired score, and display color. As stated above, for this
+          example I will be using &quot;CMSC131&quot;, which at UMD is &quot;Object Orientated
+          Programming I&quot;. In this case, &quot;CMSC131&quot; would be the code and &quot;Object
+          Orientated Programming I&quot; would be the name.
         </p>
         <p>
           As for the desired score and display color, this is completely up to you! I would just
@@ -75,11 +76,11 @@ export default function Page() {
         />
         <p>
           Once I click submit, the class will update. As you can see, the class code and name have
-          been changed to "CMSC131" and "Object Orientated Programming I" respectively. The color of
-          the code and name have changed as well to blue, what I chose as the display color.
-          Finally, the distance from desired score has changed from 100 to 70. This is because the
-          score of the class is currently 0% and since my desired score is now 70% I am 70% away
-          from my desired score.
+          been changed to &quot;CMSC131&quot; and &quot;Object Orientated Programming I&quot;
+          respectively. The color of the code and name have changed as well to blue, what I chose as
+          the display color. Finally, the distance from desired score has changed from 100 to 70.
+          This is because the score of the class is currently 0% and since my desired score is now
+          70% I am 70% away from my desired score.
         </p>
         <Image
           src={`${baseImgSrc}edit-class-result.png`}
@@ -110,9 +111,9 @@ export default function Page() {
           assignments and lock the weights of assignments within a specific assignment type.
         </p>
         <p>
-          To create a new assignment type we can simply select "New Assignment Type" and another
-          dialog for creating a new assignment type will pop up. For this example I will be creating
-          the following assignment types:
+          To create a new assignment type we can simply select &quot;New Assignment Type&quot; and
+          another dialog for creating a new assignment type will pop up. For this example I will be
+          creating the following assignment types:
         </p>
         <ul>
           <li>Projects - Various weights</li>
@@ -142,8 +143,9 @@ export default function Page() {
           life easier when you are adding in new assignments. Know the max score for each project
           will be 75? Set the the max score to 75 and each time you add a new project, it will be
           out of 75 so you don&apos;t have to manually change each one. Same goes for default name.
-          If each Project is "Project-#" where # is the project number, simply set the default name
-          to "Project-" and you only have to add the number at the end of each project. Visit{' '}
+          If each Project is &quot;Project-#&quot; where # is the project number, simply set the
+          default name to &quot;Project-&quot; and you only have to add the number at the end of
+          each project. Visit{' '}
           <Link href="/documenation/default-values" className={linkClasses}>
             Default Values
           </Link>{' '}
@@ -217,21 +219,21 @@ export default function Page() {
         </p>
         <p>
           To add new assignments we first need to open the assignment type dropdown. To do this
-          simply click the assignment type. Afterwards, you can select "New Assignment". This will
-          create a new assignment using the default values we provided when we created the
-          assignment type. For projects, click "New Assignment" 3 times.
+          simply click the assignment type. Afterwards, you can select &quot;New Assignment&quot;.
+          This will create a new assignment using the default values we provided when we created the
+          assignment type. For projects, click &quot;New Assignment&quot; 3 times.
         </p>
         <p>
           Now we need to edit our individual assignments. To edit an edittable field, you simply
           need to click the field and it will allow you to edit it. Firstly, lets update the names
-          of the assignments. To do so, click the project name "Project-" and from here you can type
-          the correct project name. Name all the projects with their correct number added at the
-          end.
+          of the assignments. To do so, click the project name &quot;Project-&quot; and from here
+          you can type the correct project name. Name all the projects with their correct number
+          added at the end.
         </p>
         <p>
           Helpful Tip: To make use of the default name simply press the right arrow key on your
           keyboard and enter the suffix of your assignment. In this case I will hit the right arrow
-          key and type "1"
+          key and type &quot;1&quot;
         </p>
         <p>
           One of the greatest features of GradeMaster is its dynamic updates. The information on the
@@ -262,8 +264,8 @@ export default function Page() {
         <h3 className="text-md md:text-lg">Quizzes</h3>
         <p>
           Now let&apos;s do quizzes. This one will be easier because we have locked the weights for
-          the quizzes. So all we need to do is open the assignment type, and click "New Assignment"
-          however many quizzes we have. In this case we will do 6.
+          the quizzes. So all we need to do is open the assignment type, and click &quot;New
+          Assignment&quot; however many quizzes we have. In this case we will do 6.
         </p>
         <p>
           Now that you have all your quizzes, you can do the same thing you did for the projects and
