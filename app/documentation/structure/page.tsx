@@ -76,17 +76,17 @@ export default function Page() {
           <li>-Display Color</li>
         </ul>
         <p>
-          A classes code is it&apos;s identifier. This often comes in the form of a short department
-          code (CMSC, CS, MATH, ENGL, etc.) followed by a class number (100, 140, 200, 351) to
-          create a class identifier. An few examples include: CMSC131, CMSC351, MATH140, CS100,
-          ENGL393. A classes name is... it&apos;s name. This would be something like Intro to Data
-          Science, Technical Writing, Calculus I, etc. These fields don&apos;t add any functionality
-          and are simply for sorting and organizing your classes.
+          A class&apos;s code is it&apos;s identifier. This often comes in the form of a short
+          department code (CMSC, CS, MATH, ENGL, etc.) followed by a class number (100, 140, 200,
+          351) to create a class identifier. An few examples include: CMSC131, CMSC351, MATH140,
+          CS100, ENGL393. A classes name is... it&apos;s name. This would be something like Intro to
+          Data Science, Technical Writing, Calculus I, etc. These fields don&apos;t add any
+          functionality and are simply for sorting and organizing your classes.
         </p>
         <p>
           The desired score for a class is the score that you want to get in that class. This is
-          completely decided by the user. When you are on a classes page, you will see a box that
-          contains information about your desired score. It will either tell you that you have
+          completely decided by the user. When you are on a class&apos;s page, you will see a box
+          that contains information about your desired score. It will either tell you that you have
           reached your desired score, or it will tell you the distance from your desired score. See{' '}
           <Link href={'/documentation/dynamic-updates'}>Dynamic Updates</Link> for more information.
         </p>
@@ -96,9 +96,9 @@ export default function Page() {
           support for Pass/Fail Classes.
         </p>
         <p>
-          A classes display color is purely cosmetic and the class code and name on a class page
-          will appear as that color, as well as the class cards that appear on the semester page
-          will be that color. It can be useful for differentiating between different classes. See{' '}
+          A class&apos;s display color is purely cosmetic. The class code and name on a class page
+          will appear in that color, the class cards that appear on the semester page will also be
+          that color. It can be useful for differentiating between different classes. See{' '}
           <Link href={'/documentation/customization'}>Customization</Link> for more information.
         </p>
       </section>
@@ -116,7 +116,7 @@ export default function Page() {
           Weighted Score is the amount of points that actually go towards your grade, i.e your
           normalized points. An example would be if you had 10 Homeworks that were all out of 100,
           and you got a 100% on all of them. If each homework is only worth 1% of your grade, i.e it
-          has a weight of 1, that your total homework weighted score would only be 10/10. Getting a
+          has a weight of 1, then your total homework weighted score would only be 10/10. Getting a
           100/100 on every homework can be misleading as the high scores of the homeworks can make
           it seem like they&apos;d be worth more, when in reality they only account for 10% of your
           grade. The weighted score for an assignment type is the sum of the weighted scores of the
@@ -124,26 +124,26 @@ export default function Page() {
         </p>
         <p>
           Lost points are the amount of normalized points you lost in an assignment type. Using the
-          Homework example above. If you were to not do 3 of your 10 homeworks, your total score
-          would be 700 / 1000. Your weighted score would be 7 / 10, which would result in you losing
-          3 points on your total grade. If you had a 100% in the class before, now you would have a
+          Homework example above. If you did not do 3 of your 10 homeworks, your total score would
+          be 700 / 1000. Your weighted score would be 7 / 10, which would result in you losing 3
+          points on your total grade. If you had a 100% in the class before, now you would have a
           97% because you lost 3 points.
         </p>
         <p>
-          An assignment types weight can be either dynamically generated or entered by a user. This
-          brings us to one of the key features of assignment types. Weight locking. For now we will
-          simply explain it as, some assignment types are given a weight and the assignments within
-          that assignment type all have the same weight. For example, quizzes are worth 20% and
-          there will be 6 quizzes. Instead of having to do 20 / 6 manually, you can the quizzes
+          An assignment type&apos;s weight can be either dynamically generated or entered by a user.
+          This brings us to one of the key features of assignment types. Weight locking. For now we
+          will simply explain it as, some assignment types are given a weight and the assignments
+          within that assignment type all have the same weight. For example, quizzes are worth 20%
+          and there will be 6 quizzes. Instead of having to do 20 / 6 manually, you can the quizzes
           weights and enter 20%. Then when you add the 6 quizzes, GradeMaster will balance the
           weights for you! Visit <Link href={'/documentation/weight-locking'}>Weight Locking</Link>{' '}
           for more information. If an assignment type has weight locking enabled, you will manually
           input an assignment types weight. This will cause all current, and future assignments of
-          that assignment type to be balanced using that weight. If an assignment type has weight
-          locking disabled, the assignment types weight will be dynamically generated as the sum of
-          its assignments weights. For example if you have 3 projects in the Projects assignment
-          type, and you set their weights as 10, 10, and 15 respectively, the Projects assignment
-          type will have a weight of 35.
+          that assignment type (for the current class) to be balanced using that weight. If an
+          assignment type has weight locking disabled, the assignment type&apos;s weight will be
+          dynamically generated as the sum of its assignments weights. For example if you have 3
+          projects in the Projects assignment type, and you set their weights as 10, 10, and 15
+          respectively, the Projects assignment type will have a weight of 35.
         </p>
         <p>The other fields of an assignment type are:</p>
         <ul>
@@ -181,21 +181,21 @@ export default function Page() {
           <li>Weight</li>
         </ul>
         <p>
-          An assignments name is simply what you call it. By default it will be the default name set
-          in your assignment type.
+          An assignment&apos;s name is simply what you call it. By default it will be the default
+          name set in your assignment type.
         </p>
         <p>
-          An assignments score and max score are the score of the assignment. Say you got a 45 out
-          of 50 on an exam. Your score would be 45 and your max score would be 50. These are both
-          set to the assignment types max score by default.
+          An assignment&apos;s score and max score are the score of the assignment. Say you got a 45
+          out of 50 on an exam. Your score would be 45 and your max score would be 50. These are
+          both set to the assignment types max score by default.
         </p>
         <p>
-          Finally, we have the assignments weight. As discussed in the{' '}
+          Finally, we have the assignment&apos;s weight. As discussed in the{' '}
           <Link href={'#assignment-types'}>assignment types</Link> section, if you have weight
-          locking enabled you will not be able to edit an assignments weight, as it will be balanced
-          automatically based on the assignment types weight and the number of assignments. If you
-          have weight locking disabled, you can edit the assignment weight as you would it&apos;s
-          score.
+          locking enabled you will not be able to edit an assignment&apos;s weight, as it will be
+          balanced automatically based on the assignment type&apos;s weight and the number of
+          assignments. If you have weight locking disabled, you can edit the assignment weight as
+          you would it&apos;s score.
         </p>
         <p>
           An assignment also includes the dynamic values weighted score and lost points. These are
@@ -205,9 +205,10 @@ export default function Page() {
           would be the weight.
         </p>
         <p>
-          When an assignments score, max score, or weight are edited, it will cause all a classes
-          dynamic values to update. Some examples of this are, a classes score, distance from
-          desired score, warnings, assignment type weight, assignment lost points, etc.
+          When an assignment&apos;s score, max score, or weight are edited, it will cause all a
+          class&apos;s dynamic values to update. Some examples of this are, a class&apos;s score,
+          distance from desired score, <Link href="/documentation/warnings">warnings</Link>,
+          assignment type weight, assignment lost points, etc.
         </p>
       </section>
     </div>
