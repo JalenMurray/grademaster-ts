@@ -26,10 +26,10 @@ export default function Page() {
       <section className="mb-6">
         <h1 className="font-title">Setup Basic Class</h1>
         <p>
-          First lets look at how to setup a basic class. This tutorial will use the guest page, but
-          the same ideas would apply to a persistent class, but you&apos;d be able to{' '}
+          First let&apos;s look at how to setup a basic class. This tutorial will use the guest
+          page, but the same ideas would apply to a saved class, but you&apos;d be able to{' '}
           <a href="#step-2">skip step 1</a> as the class values would have already been set. For
-          this example, I will be creating my first ever coding class, CMSC131 - Object Orientated
+          this example, we will be creating my first ever coding class, CMSC131 - Object Orientated
           Programming I.
         </p>
       </section>

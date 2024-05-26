@@ -15,8 +15,8 @@ export default function Page() {
         <Link className={linkClasses} href="/documentation/calculator">
           grade calculator
         </Link>{' '}
-        without being authenticated. This however, means that your data will not persist between
-        sessions. If you leave the page your data will be lost.
+        without being logged in. This however, means that your data will not save between sessions.
+        If you leave the page your data will be lost.
       </p>
       <p>
         The guest page does, however, include{' '}
