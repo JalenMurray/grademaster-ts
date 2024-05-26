@@ -194,7 +194,8 @@ export default function Page() {
           <Link href={'#assignment-types'}>assignment types</Link> section, if you have weight
           locking enabled you will not be able to edit an assignments weight, as it will be balanced
           automatically based on the assignment types weight and the number of assignments. If you
-          have weight locking disabled, you can edit the assignment weight as you would it's score.
+          have weight locking disabled, you can edit the assignment weight as you would it&apos;s
+          score.
         </p>
         <p>
           An assignment also includes the dynamic values weighted score and lost points. These are
