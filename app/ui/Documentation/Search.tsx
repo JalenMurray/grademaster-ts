@@ -9,6 +9,7 @@ import { useEffect, useState } from 'react';
 
 export default function Search() {
   const [results, setResults] = useState<SearchIndices>([]);
+  const [selected, setSelected] = useState<number>(0);
   const [hovering, setHovering] = useState<boolean>(false);
   const router = useRouter();
 
@@ -23,6 +24,20 @@ export default function Search() {
       setResults([]);
       search.value = '';
       search.blur();
+    } else if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      if (selected + 1 < results.length - 1 || selected + 1 < 3) {
+        setSelected(selected + 1);
+      } else {
+        setSelected(0);
+      }
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      if (selected !== 0) {
+        setSelected(selected - 1);
+      } else {
+        setSelected(results.length > 3 ? 2 : results.length - 1);
+      }
     }
   }
 
@@ -58,6 +73,7 @@ export default function Search() {
               aria-autocomplete="list"
               className="grow"
               onChange={handleChange}
+              onBlur={() => setResults([])}
             />
             <div>
               <kbd className="kbd">ctrl</kbd>+<kbd className="kbd">k</kbd>
@@ -75,9 +91,12 @@ export default function Search() {
             <li
               key={res.title}
               className={clsx('bg-base-200 rounded-box my-1 hover:bg-blue-400 hover:text-white', {
-                'bg-blue-400 text-white': !hovering && i === 0,
+                'bg-blue-400 text-white': !hovering && i === selected,
               })}
-              onMouseEnter={() => setHovering(true)}
+              onMouseEnter={() => {
+                setHovering(true);
+                setSelected(i);
+              }}
             >
               <Link href={res.link}>{res.title}</Link>
             </li>
