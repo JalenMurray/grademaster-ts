@@ -98,8 +98,7 @@ export default function Page() {
         <p>
           A class&apos;s display color is purely cosmetic. The class code and name on a class page
           will appear in that color, the class cards that appear on the semester page will also be
-          that color. It can be useful for differentiating between different classes. See{' '}
-          <Link href={'/documentation/customization'}>Customization</Link> for more information.
+          that color. It can be useful for differentiating between different classes.
         </p>
       </section>
       <section id="assignment-types">
@@ -207,8 +206,8 @@ export default function Page() {
         <p>
           When an assignment&apos;s score, max score, or weight are edited, it will cause all a
           class&apos;s dynamic values to update. Some examples of this are, a class&apos;s score,
-          distance from desired score, <Link href="/documentation/warnings">warnings</Link>,
-          assignment type weight, assignment lost points, etc.
+          distance from desired score, class warnings, assignment type weight, assignment lost
+          points, etc.
         </p>
       </section>
     </div>

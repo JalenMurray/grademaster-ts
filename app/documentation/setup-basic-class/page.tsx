@@ -58,10 +58,8 @@ export default function Page() {
         <p>
           As for the desired score and display color, this is completely up to you! I would just
           like to pass this class so I will set the desired score to 70. And for the display color I
-          will choose blue. Visit the{' '}
-          <Link href="/documentation/customization">Customization Page</Link> to see more
-          information about how you can customize your class. This is what the dialog looks like
-          once I&apos;ve added the information above.
+          will choose blue. This is what the dialog looks like once I&apos;ve added the information
+          above.
         </p>
         <Image
           src={`${baseImgSrc}edit-class-form.png`}
